@@ -14,22 +14,18 @@ const CategorySection = () => {
   ];
 
   return (
-    <div className="container" style={{ padding: '2rem 0' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '6rem' }}>
-        <div style={{ maxWidth: '700px' }}>
-          <span style={{ color: 'var(--primary)', fontWeight: '900', fontSize: '0.85rem', letterSpacing: '0.25rem', textTransform: 'uppercase' }}>Discover Locally</span>
-          <h2 style={{ marginTop: '1.5rem', color: '#0F172A', fontSize: '3.5rem', lineHeight: '1.1' }}>Searching is more easy by category</h2>
+    <div className="container">
+      <div style={{ marginBottom: '5rem' }} className="responsive-flex">
+        <div style={{ flex: 1 }}>
+          <span style={{ color: 'var(--primary)', fontWeight: '900', fontSize: '0.8rem', letterSpacing: '0.3rem', textTransform: 'uppercase' }}>Discover Locally</span>
+          <h2 style={{ marginTop: '1.5rem' }}>Searching is more <br className="mobile-only" /> easy by category</h2>
         </div>
-        <p style={{ maxWidth: '450px', color: 'var(--text-secondary)', fontSize: '1.2rem', paddingBottom: '0.5rem', lineHeight: '1.7' }}>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '400px', alignSelf: 'center' }}>
           Explore verified establishments curated for excellence and reviewed by the local community.
         </p>
       </div>
 
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: window.innerWidth < 640 ? '1fr' : (window.innerWidth < 1024 ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)'), 
-        gap: '3rem' 
-      }}>
+      <div className="grid-3">
         {categories.map((cat, i) => (
           <div 
             key={i} 

@@ -53,15 +53,12 @@ const Footer = () => {
         <div style={{ 
           borderTop: '1px solid rgba(255,255,255,0.05)', 
           paddingTop: '4rem', 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center', 
           opacity: 0.5, 
           fontSize: '0.9rem',
-          flexDirection: window.innerWidth < 768 ? 'column' : 'row',
-          gap: '2rem',
-          textAlign: 'center'
-        }}>
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }} className="responsive-flex">
             <span>© 2026 Fame Discovery. All rights reserved.</span>
             <div style={{ display: 'flex', gap: '2rem' }}>
                 <span style={{ cursor: 'pointer' }}>INSTAGRAM</span>

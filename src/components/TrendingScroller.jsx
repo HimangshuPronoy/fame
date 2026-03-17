@@ -21,17 +21,17 @@ const TrendingScroller = () => {
   return (
     <section style={{ padding: '10rem 0', background: 'white', overflow: 'hidden' }}>
       <div className="container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5rem' }}>
+        <div style={{ marginBottom: '5rem' }} className="responsive-flex">
           <div>
             <span style={{ color: 'var(--primary)', fontWeight: '900', fontSize: '0.85rem', letterSpacing: '0.3rem' }}>HIGHLIGHTS</span>
-            <h2 style={{ marginTop: '1rem', fontSize: '3.5rem' }}>Trending This Week</h2>
+            <h2 style={{ marginTop: '1rem' }}>Trending This Week</h2>
           </div>
           <button 
             onClick={() => navigate('/listings')}
             className="btn btn-primary" 
             style={{ padding: '1rem 2.5rem', borderRadius: '18px' }}
           >
-            View All Marketplace
+            View All
           </button>
         </div>
       </div>
@@ -91,6 +91,10 @@ const TrendingScroller = () => {
         }
         .trending-marquee:hover .trending-marquee-content {
           animation-play-state: paused;
+        }
+        @media (max-width: 768px) {
+          .trending-card { width: 300px !important; }
+          .trending-marquee-content { animation-duration: 30s; }
         }
         .trending-card:hover img { 
           transform: scale(1.1); 

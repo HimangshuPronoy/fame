@@ -6,7 +6,7 @@ import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
 import Process from '../components/Process';
 import TrendingScroller from '../components/TrendingScroller';
-import { Search, MapPin, Compass, Play } from 'lucide-react';
+import { Search, Compass, Play } from 'lucide-react';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Home = () => {
     const timer = setInterval(() => {
       setPrevBgIndex(bgIndex);
       setBgIndex((prev) => (prev + 1) % length);
-    }, 6000); // Slightly longer for a more relaxed premium feel
+    }, 6000);
     return () => clearInterval(timer);
   }, [bgIndex, backgroundImages.length]);
 
@@ -45,27 +45,17 @@ const Home = () => {
   };
 
   return (
-    <div style={{ background: 'white' }}>
-      <section 
-        style={{ 
-          height: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          color: 'white',
-          padding: 0,
-          position: 'relative',
-          overflow: 'hidden',
-          background: '#0F172A' // Dark fallback
-        }}
-      >
-        {/* Background Layers for Smooth Cross-fade */}
+    <div className="home-root">
+      {/* Hero Section */}
+      <section className="hero-section" style={{ height: '90vh', minHeight: '600px', position: 'relative', overflow: 'hidden', background: '#000' }}>
+        {/* Background Layers */}
         {backgroundImages.map((img, idx) => (
           <div 
             key={idx}
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.7)), url(${img})`,
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url(${img})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               opacity: idx === bgIndex ? 1 : 0,
@@ -75,151 +65,91 @@ const Home = () => {
           />
         ))}
 
-        <div className="container reveal" style={{ zIndex: 10 }}>
-          <div style={{ 
-            display: 'inline-flex', 
-            alignItems: 'center', 
-            gap: '1rem', 
-            background: 'rgba(255,255,255,0.1)', 
-            backdropFilter: 'blur(12px)', 
-            padding: '0.75rem 1.5rem', 
-            borderRadius: '40px', 
-            border: '1px solid rgba(255,255,255,0.2)', 
-            marginBottom: window.innerWidth < 768 ? '1.5rem' : '3rem' 
-          }}>
-              <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--primary)', boxShadow: '0 0 10px var(--primary)' }}></div>
-              <span style={{ fontSize: '0.85rem', fontWeight: '800', letterSpacing: '0.15em' }}>EVERYTHING IS POSSIBLE</span>
-          </div>
-          
-          <h1 style={{ 
-            marginBottom: '2.5rem', 
-            textShadow: '0 4px 12px rgba(0,0,0,0.1)',
-            fontSize: window.innerWidth < 768 ? '3.2rem' : '5rem'
-          }}>
-            Elevate Your <br/>
-            <span style={{ fontStyle: 'italic', fontWeight: '300', opacity: 0.9 }}>Lifestyle</span> Discovery<span style={{ color: 'var(--primary)' }}>.</span>
-          </h1>
-          
-          <p style={{ 
-            fontSize: window.innerWidth < 768 ? '1.1rem' : '1.4rem', 
-            opacity: 0.95, 
-            marginBottom: '4rem', 
-            maxWidth: '700px', 
-            lineHeight: '1.6', 
-            fontWeight: '500' 
-          }}>
-            Fame hand-verifies the world’s most exclusive restaurants, secret nightspots, and elite wellness centers.
-          </p>
-          
-          <div style={{ 
-            display: 'flex', 
-            gap: '1.5rem', 
-            alignItems: 'center',
-            flexDirection: window.innerWidth < 768 ? 'column-reverse' : 'row'
-          }}>
+        <div className="container" style={{ height: '100%', display: 'flex', alignItems: 'center', position: 'relative', zIndex: 10 }}>
+          <div className="hero-content reveal">
             <div style={{ 
-              background: 'white', 
-              padding: '0.75rem', 
-              borderRadius: '24px', 
-              display: 'flex', 
-              width: '100%',
-              maxWidth: '650px',
-              flexDirection: window.innerWidth < 480 ? 'column' : 'row',
-              boxShadow: '0 30px 60px -15px rgba(0,0,0,0.3)',
-              border: '1px solid rgba(255,255,255,0.2)'
+              display: 'inline-flex', 
+              alignItems: 'center', 
+              gap: '1rem', 
+              background: 'rgba(255,255,255,0.1)', 
+              backdropFilter: 'blur(12px)', 
+              padding: '0.6rem 1.25rem', 
+              borderRadius: '40px', 
+              border: '1px solid rgba(255,255,255,0.2)', 
+              marginBottom: '1rem' 
             }}>
-              <div style={{ 
-                flex: 1, 
-                padding: window.innerWidth < 480 ? '1rem' : '0 1.5rem', 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '0.8rem' 
-              }}>
-                <Search size={22} color="var(--primary)" />
-                <input 
-                  type="text" 
-                  placeholder="What are you looking for?" 
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyDown={handleSearch}
-                  style={{ width: '100%', border: 'none', outline: 'none', fontSize: '1.05rem', color: '#0F172A', fontWeight: '600' }}
-                />
-              </div>
-              <button 
-                onClick={handleSearch}
-                className="btn btn-primary" 
-                style={{ 
-                  padding: '1rem 3rem', 
-                  borderRadius: '18px', 
-                  fontSize: '1rem',
-                  width: window.innerWidth < 480 ? '100%' : 'auto'
-                }}
-              >
-                Find Now
-              </button>
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--primary)', boxShadow: '0 0 10px var(--primary)' }}></div>
+                <span style={{ fontSize: '0.75rem', fontWeight: '800', letterSpacing: '0.15em', color: 'white' }}>EVERYTHING IS POSSIBLE</span>
             </div>
             
-            <button className="btn btn-glass" style={{ 
-              width: window.innerWidth < 768 ? '48px' : '64px', 
-              height: window.innerWidth < 768 ? '48px' : '64px', 
-              borderRadius: '50%', 
-              padding: 0 
-            }}>
-              <Play fill="white" size={window.innerWidth < 768 ? 18 : 24} />
-            </button>
+            <h1 style={{ color: 'white', marginBottom: '1.5rem' }}>
+              Elevate Your <br/>
+              <span style={{ fontStyle: 'italic', fontWeight: '300', opacity: 0.9 }}>Lifestyle</span> Discovery<span style={{ color: 'var(--primary)' }}>.</span>
+            </h1>
+            
+            <p style={{ color: 'white', fontSize: '1.1rem', maxWidth: '550px', opacity: 0.9, lineHeight: '1.8', marginBottom: '3rem' }}>
+              Fame hand-verifies the world's most exclusive restaurants, secret nightspots, and elite wellness centers.
+            </p>
+            
+            <div className="hero-search-wrapper">
+                <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '1rem', padding: '0 1rem' }}>
+                    <Search className="mobile-only" size={20} color="var(--text-muted)" />
+                    <input 
+                      type="text" 
+                      placeholder="What are you looking for?" 
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      onKeyDown={handleSearch}
+                      style={{ border: 'none', background: 'transparent', width: '100%', fontSize: '1rem', outline: 'none', fontWeight: '500' }}
+                    />
+                </div>
+                <button 
+                  onClick={handleSearch}
+                  className="btn btn-primary" 
+                  style={{ padding: '1rem 2.5rem', borderRadius: '14px', whiteSpace: 'nowrap' }}
+                >
+                  Find Now
+                </button>
+            </div>
           </div>
-        </div>
-
-        <div style={{ position: 'absolute', bottom: '3rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', opacity: 0.6 }}>
-            <span style={{ fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.2em' }}>SCROLL</span>
-            <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, white, transparent)' }}></div>
         </div>
       </section>
 
-      <section id="categories" style={{ padding: window.innerWidth < 768 ? '6rem 0' : '12rem 0', background: 'var(--bg-subtle)' }}>
+      <section id="categories" style={{ padding: 'var(--section-padding) 0', background: 'var(--bg-subtle)' }}>
         <CategorySection />
       </section>
 
       <div id="trending">
         <TrendingScroller />
       </div>
+
       <Features />
       <Process />
 
       <section style={{ padding: 'var(--section-padding) 0', overflow: 'hidden' }}>
-        <div className="container" style={{ 
-          display: 'flex', 
-          gap: '6rem', 
-          alignItems: 'center',
-          flexDirection: window.innerWidth < 1024 ? 'column' : 'row'
-        }}>
-          <div style={{ flex: 1, textAlign: window.innerWidth < 1024 ? 'center' : 'left' }} className="reveal">
+        <div className="container responsive-flex" style={{ gap: '6rem' }}>
+          <div style={{ flex: 1 }} className="reveal">
             <span style={{ color: 'var(--primary)', fontWeight: '900', fontSize: '0.8rem', letterSpacing: '0.3rem' }}>PREMIUM CURATION</span>
             <h2 style={{ marginTop: '2rem', marginBottom: '2.5rem' }}>Only the <span className="text-gradient">Best</span> Makes the Cut.</h2>
-            <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginBottom: '4rem', lineHeight: '1.8' }}>
+            <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '3rem', lineHeight: '1.8' }}>
               We don't list every place. We list the right places. Our 'Excellence Council' personally visits and verifies every establishment before it earns the Fame mark.
             </p>
-            <div style={{ 
-              display: 'flex', 
-              gap: '3rem',
-              justifyContent: window.innerWidth < 1024 ? 'center' : 'flex-start',
-              flexWrap: 'wrap'
-            }}>
+            <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
                 <div>
-                    <h4 style={{ fontSize: window.innerWidth < 768 ? '1.8rem' : '2.5rem', fontWeight: '900', color: 'var(--primary)' }}>5.8k+</h4>
-                    <span style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--text-muted)' }}>VERIFIED SPOTS</span>
+                    <h4 style={{ fontSize: '2.2rem', fontWeight: '900', color: 'var(--primary)' }}>5.8k+</h4>
+                    <span style={{ fontWeight: '700', fontSize: '0.8rem', color: 'var(--text-muted)' }}>VERIFIED SPOTS</span>
                 </div>
                 <div>
-                    <h4 style={{ fontSize: window.innerWidth < 768 ? '1.8rem' : '2.5rem', fontWeight: '900', color: 'var(--primary)' }}>12</h4>
-                    <span style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--text-muted)' }}>GLOBAL CITIES</span>
+                    <h4 style={{ fontSize: '2.2rem', fontWeight: '900', color: 'var(--primary)' }}>12</h4>
+                    <span style={{ fontWeight: '700', fontSize: '0.8rem', color: 'var(--text-muted)' }}>GLOBAL CITIES</span>
                 </div>
                 <div>
-                    <h4 style={{ fontSize: window.innerWidth < 768 ? '1.8rem' : '2.5rem', fontWeight: '900', color: 'var(--primary)' }}>24/7</h4>
-                    <span style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--text-muted)' }}>ACCESS HOOKS</span>
+                    <h4 style={{ fontSize: '2.2rem', fontWeight: '900', color: 'var(--primary)' }}>24/7</h4>
+                    <span style={{ fontWeight: '700', fontSize: '0.8rem', color: 'var(--text-muted)' }}>ACCESS HOOKS</span>
                 </div>
             </div>
           </div>
-          <div style={{ flex: 1, position: 'relative' }}>
+          <div style={{ flex: 1, position: 'relative', width: '100%', maxWidth: '500px' }}>
             <div style={{ 
                 width: '100%', 
                 aspectRatio: '1', 
@@ -230,27 +160,6 @@ const Home = () => {
             }}>
                 <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80" alt="curation" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
-            <div style={{ 
-                position: 'absolute', 
-                bottom: '-30px', 
-                left: '-30px', 
-                background: 'white', 
-                padding: '2rem', 
-                borderRadius: '30px',
-                boxShadow: '0 20px 50px rgba(0,0,0,0.1)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1.5rem',
-                border: '1px solid var(--border-light)'
-            }}>
-                <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: '#10B981', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
-                    <Compass size={24} />
-                </div>
-                <div>
-                    <h4 style={{ fontSize: '1rem', fontWeight: '900' }}>Excellence Badge</h4>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Official Verification</span>
-                </div>
-            </div>
           </div>
         </div>
       </section>
@@ -259,18 +168,18 @@ const Home = () => {
 
       <section style={{ padding: 'var(--section-padding) 0', borderTop: '1px solid var(--border-light)' }}>
         <div className="container" style={{ textAlign: 'center' }}>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '900', letterSpacing: '0.4rem' }}>TRUSTED BY GLOBAL VISIONARIES</span>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: '900', letterSpacing: '0.4rem' }}>TRUSTED BY GLOBAL VISIONARIES</span>
             <div style={{ 
               display: 'flex', 
               justifyContent: 'center', 
               flexWrap: 'wrap', 
-              gap: window.innerWidth < 768 ? '3rem' : '6rem', 
-              marginTop: '6rem', 
+              gap: '4rem', 
+              marginTop: '5rem', 
               opacity: 0.3, 
-              fontSize: window.innerWidth < 768 ? '1.2rem' : '2rem', 
+              fontSize: '1.8rem', 
               fontWeight: '900', 
               letterSpacing: '2px' 
-            }}>
+            }} className="logo-grid">
                 <span>GOOGLE</span>
                 <span>META</span>
                 <span>NETFLIX</span>
@@ -281,33 +190,27 @@ const Home = () => {
 
       <section style={{ padding: 'var(--section-padding) 0', background: '#111827', color: 'white', position: 'relative', overflow: 'hidden' }}>
         <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 10 }}>
-          <h2 style={{ fontSize: window.innerWidth < 768 ? '2.5rem' : '4.5rem', color: 'white', marginBottom: '2.5rem' }}>Ready to <span style={{ color: 'var(--primary)' }}>Fame</span> your city?</h2>
-          <p style={{ fontSize: window.innerWidth < 768 ? '1.1rem' : '1.4rem', opacity: 0.7, marginBottom: '5rem', maxWidth: '700px', margin: '0 auto 5rem' }}>
+          <h2 style={{ color: 'white', marginBottom: '2.5rem' }}>Ready to <span style={{ color: 'var(--primary)' }}>Fame</span> your city?</h2>
+          <p style={{ opacity: 0.7, marginBottom: '5rem', maxWidth: '750px', margin: '0 auto 5rem', fontSize: '1.1rem' }}>
             Join 50k+ explorers who are redefining their lifestyle discovery through verified curation.
           </p>
-          <div style={{ 
-            display: 'flex', 
-            gap: '2rem', 
-            justifyContent: 'center',
-            flexDirection: window.innerWidth < 640 ? 'column' : 'row'
-          }}>
+          <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <button 
                 onClick={() => navigate('/login')}
                 className="btn btn-primary" 
-                style={{ padding: '1.5rem 4rem', borderRadius: '24px', fontSize: '1.1rem' }}
+                style={{ padding: '1.25rem 3.5rem', borderRadius: '20px' }}
             >
                 Create Account
             </button>
             <button 
                 onClick={() => navigate('/admin')}
                 className="btn btn-glass" 
-                style={{ padding: '1.5rem 4rem', borderRadius: '24px', fontSize: '1.1rem' }}
+                style={{ padding: '1.25rem 3.5rem', borderRadius: '20px' }}
             >
                 Partner with Us
             </button>
           </div>
         </div>
-        <div style={{ position: 'absolute', top: '-10%', right: '-10%', width: '40%', height: '60%', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, transparent 70%)' }}></div>
       </section>
 
       <Footer />
