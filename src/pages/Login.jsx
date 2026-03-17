@@ -52,22 +52,20 @@ const Login = () => {
   };
 
   return (
-    <div style={{ 
+    <div className="login-root" style={{ 
         display: 'flex', 
         height: '100vh', 
         width: '100vw', 
         background: 'white', 
-        overflow: 'hidden',
         position: 'fixed',
         inset: 0,
         zIndex: 2000
     }}>
       {/* Left Side: Aesthetic Lifestyle Image */}
-      <div style={{ 
+      <div className="desktop-only" style={{ 
         flex: 1.2, 
         position: 'relative', 
-        overflow: 'hidden',
-        display: window.innerWidth < 1024 ? 'none' : 'block' 
+        overflow: 'hidden'
       }}>
         <img 
           src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" 
@@ -97,11 +95,12 @@ const Login = () => {
         flex: 1, 
         display: 'flex', 
         flexDirection: 'column',
-        padding: '2.5rem 4rem',
-        overflowY: 'auto'
+        padding: 'clamp(1.5rem, 5vw, 4rem)',
+        overflowY: 'auto',
+        background: 'white'
       }}>
         {/* Header Actions */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'clamp(2rem, 8vw, 4rem)' }}>
           <button 
             onClick={() => navigate('/')}
             style={{ 
@@ -113,10 +112,10 @@ const Login = () => {
               color: '#64748B', 
               fontWeight: '700', 
               cursor: 'pointer',
-              fontSize: '0.9rem'
+              fontSize: '0.85rem'
             }}
           >
-            <ArrowLeft size={18} /> Back
+            <ArrowLeft size={16} /> Back
           </button>
           <div style={{ display: 'flex', gap: '0.5rem', fontSize: '0.85rem' }}>
              <span style={{ color: '#64748B', fontWeight: '500' }}>
@@ -133,10 +132,10 @@ const Login = () => {
 
         {/* Form Container */}
         <div style={{ maxWidth: '400px', width: '100%', margin: '0 auto' }}>
-          <h1 style={{ fontSize: '2.2rem', fontWeight: '900', color: '#0F172A', marginBottom: '0.75rem', letterSpacing: '-1px' }}>
+          <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 2.2rem)', fontWeight: '900', color: '#0F172A', marginBottom: '0.75rem', letterSpacing: '-1px', lineHeight: '1.1' }}>
             {isLogin ? "Welcome Back" : "Start Discovering"}
           </h1>
-          <p style={{ color: '#64748B', marginBottom: '2rem', fontSize: '1rem', fontWeight: '500' }}>
+          <p style={{ color: '#64748B', marginBottom: '2rem', fontSize: '0.95rem', fontWeight: '500' }}>
             {isLogin ? "Enter your details to sign in." : "Create your account today."}
           </p>
 
@@ -155,7 +154,7 @@ const Login = () => {
             </div>
           )}
           
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             {!isLogin && (
               <div>
                 <label className="auth-label">Full Name</label>
@@ -217,7 +216,7 @@ const Login = () => {
                }}>
                  {agreed && <Check size={14} color="white" strokeWidth={4} />}
                </div>
-               <p style={{ fontSize: '0.85rem', color: '#64748B', lineHeight: '1.4', fontWeight: '500' }}>
+               <p style={{ fontSize: '0.8rem', color: '#64748B', lineHeight: '1.4', fontWeight: '500' }}>
                  I agree to the <span style={{ color: '#0F172A', fontWeight: '700' }}>Terms</span> and <span style={{ color: '#0F172A', fontWeight: '700' }}>Privacy</span>.
                </p>
             </div>
@@ -226,16 +225,16 @@ const Login = () => {
               type="submit" 
               className="btn btn-primary" 
               disabled={loading}
-              style={{ padding: '1.1rem', fontSize: '1rem', borderRadius: '16px', marginTop: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}
+              style={{ padding: '1rem', fontSize: '0.95rem', borderRadius: '14px', marginTop: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}
             >
               {loading ? <Loader2 className="spinning" size={20} /> : (isLogin ? "Sign In Now" : "Create Account")}
             </button>
           </form>
 
           {/* Social Auth */}
-          <div style={{ marginTop: '3rem', textAlign: 'center' }}>
-             <p style={{ fontSize: '0.75rem', fontWeight: '800', color: '#CBD5E1', letterSpacing: '0.1em', marginBottom: '1.5rem' }}>OR CONTINUE WITH</p>
-             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
+          <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
+             <p style={{ fontSize: '0.7rem', fontWeight: '800', color: '#CBD5E1', letterSpacing: '0.1em', marginBottom: '1.25rem' }}>OR CONTINUE WITH</p>
+             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '0.75rem' }}>
                 {['Google', 'Apple', 'Meta'].map(p => (
                    <button key={p} style={{ padding: '0.75rem', borderRadius: '12px', border: '1.5px solid #E2E8F0', background: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer' }}>{p}</button>
                 ))}
@@ -245,8 +244,8 @@ const Login = () => {
 
         {/* Footer info */}
         <div style={{ marginTop: 'auto', paddingTop: '2.5rem', display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#94A3B8' }}>
-           <ShieldCheck size={18} />
-           <span style={{ fontSize: '0.8rem', fontWeight: '600' }}>Bank-grade security encryption.</span>
+           <ShieldCheck size={16} />
+           <span style={{ fontSize: '0.75rem', fontWeight: '600' }}>Bank-grade security encryption.</span>
         </div>
       </div>
 

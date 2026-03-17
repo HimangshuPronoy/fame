@@ -78,16 +78,16 @@ const ListingPage = () => {
 
   return (
     <div style={{ background: '#F9FAFB', minHeight: '100vh', paddingTop: 'var(--nav-height)' }}>
-      <div className="container" style={{ padding: '4rem 0 8rem' }}>
-        <div style={{ textAlign: 'left', marginBottom: '4rem' }}>
-            <span style={{ color: '#EF4444', fontSize: '0.8rem', fontWeight: '900', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Discover Locally</span>
-            <h1 style={{ fontSize: '3rem', marginTop: '0.5rem', color: '#0F172A' }}>Explore Lifestyle Spots</h1>
+      <div className="container" style={{ padding: 'clamp(2rem, 5vw, 4rem) 5% 8rem' }}>
+        <div style={{ textAlign: 'left', marginBottom: 'clamp(2rem, 4vw, 4rem)' }}>
+            <span style={{ color: '#EF4444', fontSize: '0.75rem', fontWeight: '900', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Discover Locally</span>
+            <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginTop: '0.5rem', color: '#0F172A', lineHeight: '1.1' }}>Explore <br className="mobile-only" /> Lifestyle Spots</h1>
         </div>
 
-        <div style={{ display: 'flex', gap: '3.5rem', alignItems: 'flex-start' }}>
+        <div className="listing-page-layout">
           <div className={`filter-sidebar-wrapper ${showMobileFilters ? 'active' : ''}`}>
              <div className="mobile-filter-header">
-                <h3>Filters</h3>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: '800' }}>Filters</h3>
                 <X onClick={() => setShowMobileFilters(false)} style={{ cursor: 'pointer' }} />
              </div>
              <FilterSidebar 
@@ -106,10 +106,11 @@ const ListingPage = () => {
           </div>
           {showMobileFilters && <div className="filter-overlay" onClick={() => setShowMobileFilters(false)}></div>}
 
-          <div style={{ flex: 1 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1.5rem' }}>
-                <div>
-                   <h3 style={{ fontSize: '1.75rem', fontWeight: '800' }}>{filteredListings.length} <span style={{ color: '#64748B', fontWeight: '500' }}>Handpicked Spots Found</span></h3>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+                <div style={{ flex: '1 0 100%', marginBottom: '0.5rem' }} className="mobile-only"></div>
+                <div style={{ flex: 1 }}>
+                   <h3 style={{ fontSize: 'clamp(1.2rem, 4vw, 1.75rem)', fontWeight: '800', lineHeight: '1.2' }}>{filteredListings.length} <span style={{ color: '#64748B', fontWeight: '500' }}>Handpicked Spots Found</span></h3>
                 </div>
                 
                 {/* Active Pills */}
@@ -174,19 +175,33 @@ const ListingPage = () => {
       </div>
       
       <style>{`
+        .listing-page-layout {
+            display: flex;
+            gap: 3.5rem;
+            align-items: flex-start;
+        }
+
+        @media (max-width: 1024px) {
+            .listing-page-layout {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+
         .filter-pill {
             background: white; 
             border: 1px solid #E2E8F0; 
             color: #475569; 
             padding: 0.5rem 1rem; 
-            borderRadius: '12px'; 
-            fontSize: 0.8rem; 
-            fontWeight: 700; 
+            border-radius: 12px; 
+            font-size: 0.75rem; 
+            font-weight: 700; 
             display: flex; 
-            alignItems: center; 
-            gap: 0.6rem; 
+            align-items: center; 
+            gap: 0.5rem; 
             cursor: pointer;
             transition: all 0.2s;
+            white-space: nowrap;
         }
         .filter-pill:hover {
             border-color: #EF4444;
