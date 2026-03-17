@@ -76,21 +76,47 @@ const Home = () => {
         ))}
 
         <div className="container reveal" style={{ zIndex: 10 }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '1rem', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(12px)', padding: '0.75rem 1.5rem', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.2)', marginBottom: '3rem' }}>
+          <div style={{ 
+            display: 'inline-flex', 
+            alignItems: 'center', 
+            gap: '1rem', 
+            background: 'rgba(255,255,255,0.1)', 
+            backdropFilter: 'blur(12px)', 
+            padding: '0.75rem 1.5rem', 
+            borderRadius: '40px', 
+            border: '1px solid rgba(255,255,255,0.2)', 
+            marginBottom: window.innerWidth < 768 ? '1.5rem' : '3rem' 
+          }}>
               <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--primary)', boxShadow: '0 0 10px var(--primary)' }}></div>
               <span style={{ fontSize: '0.85rem', fontWeight: '800', letterSpacing: '0.15em' }}>EVERYTHING IS POSSIBLE</span>
           </div>
           
-          <h1 style={{ marginBottom: '2.5rem', textShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+          <h1 style={{ 
+            marginBottom: '2.5rem', 
+            textShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            fontSize: window.innerWidth < 768 ? '3.2rem' : '5rem'
+          }}>
             Elevate Your <br/>
             <span style={{ fontStyle: 'italic', fontWeight: '300', opacity: 0.9 }}>Lifestyle</span> Discovery<span style={{ color: 'var(--primary)' }}>.</span>
           </h1>
           
-          <p style={{ fontSize: '1.4rem', opacity: 0.95, marginBottom: '4rem', maxWidth: '700px', lineHeight: '1.6', fontWeight: '500' }}>
+          <p style={{ 
+            fontSize: window.innerWidth < 768 ? '1.1rem' : '1.4rem', 
+            opacity: 0.95, 
+            marginBottom: '4rem', 
+            maxWidth: '700px', 
+            lineHeight: '1.6', 
+            fontWeight: '500' 
+          }}>
             Fame hand-verifies the world’s most exclusive restaurants, secret nightspots, and elite wellness centers.
           </p>
           
-          <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+          <div style={{ 
+            display: 'flex', 
+            gap: '1.5rem', 
+            alignItems: 'center',
+            flexDirection: window.innerWidth < 768 ? 'column-reverse' : 'row'
+          }}>
             <div style={{ 
               background: 'white', 
               padding: '0.75rem', 
@@ -98,10 +124,17 @@ const Home = () => {
               display: 'flex', 
               width: '100%',
               maxWidth: '650px',
+              flexDirection: window.innerWidth < 480 ? 'column' : 'row',
               boxShadow: '0 30px 60px -15px rgba(0,0,0,0.3)',
               border: '1px solid rgba(255,255,255,0.2)'
             }}>
-              <div style={{ flex: 1, padding: '0 1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+              <div style={{ 
+                flex: 1, 
+                padding: window.innerWidth < 480 ? '1rem' : '0 1.5rem', 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '0.8rem' 
+              }}>
                 <Search size={22} color="var(--primary)" />
                 <input 
                   type="text" 
@@ -115,14 +148,24 @@ const Home = () => {
               <button 
                 onClick={handleSearch}
                 className="btn btn-primary" 
-                style={{ padding: '1rem 3rem', borderRadius: '18px', fontSize: '1rem' }}
+                style={{ 
+                  padding: '1rem 3rem', 
+                  borderRadius: '18px', 
+                  fontSize: '1rem',
+                  width: window.innerWidth < 480 ? '100%' : 'auto'
+                }}
               >
                 Find Now
               </button>
             </div>
             
-            <button className="btn btn-glass" style={{ width: '64px', height: '64px', borderRadius: '50%', padding: 0 }}>
-              <Play fill="white" size={24} />
+            <button className="btn btn-glass" style={{ 
+              width: window.innerWidth < 768 ? '48px' : '64px', 
+              height: window.innerWidth < 768 ? '48px' : '64px', 
+              borderRadius: '50%', 
+              padding: 0 
+            }}>
+              <Play fill="white" size={window.innerWidth < 768 ? 18 : 24} />
             </button>
           </div>
         </div>
@@ -133,11 +176,13 @@ const Home = () => {
         </div>
       </section>
 
-      <section style={{ padding: '12rem 0', background: 'var(--bg-subtle)' }}>
+      <section id="categories" style={{ padding: window.innerWidth < 768 ? '6rem 0' : '12rem 0', background: 'var(--bg-subtle)' }}>
         <CategorySection />
       </section>
 
-      <TrendingScroller />
+      <div id="trending">
+        <TrendingScroller />
+      </div>
       <Features />
       <Process />
 

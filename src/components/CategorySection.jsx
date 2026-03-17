@@ -25,7 +25,11 @@ const CategorySection = () => {
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3rem' }}>
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: window.innerWidth < 640 ? '1fr' : (window.innerWidth < 1024 ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)'), 
+        gap: '3rem' 
+      }}>
         {categories.map((cat, i) => (
           <div 
             key={i} 

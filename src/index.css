@@ -50,6 +50,17 @@ h1 { font-size: 5rem; font-weight: 900; letter-spacing: -0.05em; line-height: 0.
 h2 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; }
 h3 { font-size: 1.5rem; font-weight: 700; }
 
+@media (max-width: 1024px) {
+  h1 { font-size: 4rem; }
+  h2 { font-size: 3rem; }
+}
+
+@media (max-width: 768px) {
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2.2rem; }
+  :root { --nav-height: 70px; }
+}
+
 /* Interactive Buttons */
 .btn {
   display: inline-flex;
@@ -139,6 +150,13 @@ h3 { font-size: 1.5rem; font-weight: 700; }
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 40px 80px -20px rgba(0,0,0,0.1);
   border-color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .category-card {
+    padding: 2rem;
+    gap: 1.5rem;
+  }
 }
 
 .category-card:hover .icon-box {

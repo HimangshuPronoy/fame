@@ -16,13 +16,13 @@ const Footer = () => {
             </p>
           </div>
           
-          <div>
+           <div>
             <h4 style={{ color: 'white', marginBottom: '2rem', fontSize: '1.2rem', fontWeight: '800' }}>Discovery</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <li><Link to="/listings" className="footer-link">Marketplace</Link></li>
-              <li><Link to="/#trending" className="footer-link">Trending Spots</Link></li>
+              <li><a href="/#trending" className="footer-link">Trending Spots</a></li>
               <li><Link to="/listings?sort=new" className="footer-link">New Openings</Link></li>
-              <li><Link to="/#categories" className="footer-link">Featured Niches</Link></li>
+              <li><a href="/#categories" className="footer-link">Featured Niches</a></li>
             </ul>
           </div>
           
@@ -31,7 +31,7 @@ const Footer = () => {
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <li><Link to="/" className="footer-link">About Us</Link></li>
               <li><Link to="/admin" className="footer-link">Join as Partner</Link></li>
-              <li><Link to="/" className="footer-link">Privacy Policy</Link></li>
+              <li><Link to="/listings" className="footer-link">Legal Notice</Link></li>
               <li><Link to="/" className="footer-link">Contact Support</Link></li>
             </ul>
           </div>
@@ -50,7 +50,18 @@ const Footer = () => {
           </div>
         </div>
         
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', opacity: 0.5, fontSize: '0.9rem' }}>
+        <div style={{ 
+          borderTop: '1px solid rgba(255,255,255,0.05)', 
+          paddingTop: '4rem', 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          opacity: 0.5, 
+          fontSize: '0.9rem',
+          flexDirection: window.innerWidth < 768 ? 'column' : 'row',
+          gap: '2rem',
+          textAlign: 'center'
+        }}>
             <span>© 2026 Fame Discovery. All rights reserved.</span>
             <div style={{ display: 'flex', gap: '2rem' }}>
                 <span style={{ cursor: 'pointer' }}>INSTAGRAM</span>
