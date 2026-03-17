@@ -27,8 +27,8 @@ const Process = () => {
           <h2 style={{ marginTop: '2rem' }}>Experience the World of Fame</h2>
         </div>
 
-        <div className="grid-3" style={{ position: 'relative' }}>
-          {/* Connector Line - Hidden on mobile */}
+        <div className="grid-3" style={{ position: 'relative', width: '100%' }}>
+          {/* Connector Line - Hidden on mobile via CSS */}
           <div 
             className="process-connector"
             style={{ 
@@ -43,7 +43,7 @@ const Process = () => {
           ></div>
 
           {steps.map((s, i) => (
-            <div key={i} style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
+            <div key={i} style={{ textAlign: 'center', position: 'relative', zIndex: 1, width: '100%', padding: '0 1rem', boxSizing: 'border-box' }}>
               <div style={{ 
                 width: '80px', 
                 height: '80px', 
@@ -60,7 +60,7 @@ const Process = () => {
                 {s.icon}
               </div>
               <h4 style={{ fontSize: '1.5rem', marginBottom: '1.25rem', fontWeight: '800' }}>{s.title}</h4>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', maxWidth: '300px', margin: '0 auto' }}>{s.desc}</p>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', maxWidth: '100%', margin: '0 auto' }}>{s.desc}</p>
             </div>
           ))}
         </div>

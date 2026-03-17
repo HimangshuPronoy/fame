@@ -14,13 +14,13 @@ const CategorySection = () => {
   ];
 
   return (
-    <div className="container">
-      <div style={{ marginBottom: '5rem' }} className="responsive-flex">
-        <div style={{ flex: 1 }}>
+    <div className="container" style={{ overflow: 'hidden' }}>
+      <div style={{ marginBottom: 'clamp(3rem, 5vw, 5rem)' }} className="responsive-flex">
+        <div style={{ flex: 1, minWidth: '250px' }}>
           <span style={{ color: 'var(--primary)', fontWeight: '900', fontSize: '0.8rem', letterSpacing: '0.3rem', textTransform: 'uppercase' }}>Discover Locally</span>
-          <h2 style={{ marginTop: '1.5rem' }}>Searching is more <br className="mobile-only" /> easy by category</h2>
+          <h2 style={{ marginTop: '1.5rem', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>Searching is more <br className="mobile-only" /> easy by category</h2>
         </div>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '400px', alignSelf: 'center' }}>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '400px', alignSelf: 'center', minWidth: '250px' }}>
           Explore verified establishments curated for excellence and reviewed by the local community.
         </p>
       </div>
@@ -31,6 +31,7 @@ const CategorySection = () => {
             key={i} 
             onClick={() => navigate(`/listings?cat=${encodeURIComponent(cat.title)}`)}
             className="category-card"
+            style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', width: '100%', boxSizing: 'border-box' }}
           >
             <div 
               className="icon-box"
