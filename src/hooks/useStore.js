@@ -9,13 +9,36 @@ const notify = () => listeners.forEach(l => l());
 
 export const useStore = () => {
   const [listings, setListings] = useState(globalListings);
-  const [requests, setRequests] = useState(globalRequests);
+  const [requests] = useState(globalRequests);
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      setUser(session?.user ?? null);
+      
+      if (session?.user) {
+        const { data } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', session.user.id)
+          .single();
+        setProfile(data);
+      } else {
+        setProfile(null);
+      }
+      notify();
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   const fetchListings = async () => {
+    if (loading) return;
     setLoading(true);
+    
     // Dynamic Mock Data for Lifestyle Discovery
     const mockLifestyleData = [
       {
@@ -95,12 +118,16 @@ export const useStore = () => {
     globalListings = mockLifestyleData;
     setListings([...globalListings]);
     setLoading(false);
+    notify();
   };
 
   useEffect(() => {
     // Initial fetch if empty
     if (globalListings.length === 0) {
-      fetchListings();
+      const timer = setTimeout(() => {
+        fetchListings();
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, []);
 
@@ -116,6 +143,7 @@ export const useStore = () => {
 
     if (!error && data) {
       globalListings = [data[0], ...globalListings];
+      setListings([...globalListings]);
       notify();
     } else {
       console.error('Error adding listing:', error);
@@ -130,6 +158,7 @@ export const useStore = () => {
 
     if (!error) {
       globalListings = globalListings.filter(l => l.id !== id);
+      setListings([...globalListings]);
       notify();
     } else {
       console.error('Error deleting listing:', error);
@@ -143,7 +172,6 @@ export const useStore = () => {
       date: new Date().toISOString().split('T')[0] 
     };
     
-    // Fallback to local if table doesn't exist yet, but ideally we'd have a 'requests' table
     globalRequests = [newRequest, ...globalRequests];
     notify();
   };
