@@ -9,10 +9,18 @@ import { useSearchParams } from 'react-router-dom';
 const ListingPage = () => {
   const { listings } = useStore();
   const [searchParams, setSearchParams] = useSearchParams();
+  const catParam = searchParams.get('cat');
   
   // States for filtering
-  const [selectedCats, setSelectedCats] = useState([]);
+  const [selectedCats, setSelectedCats] = useState(catParam ? [catParam] : []);
   const [selectedLocation, setSelectedLocation] = useState('All');
+  
+  // Update selectedCats when URL param changes
+  useState(() => {
+    if (catParam && !selectedCats.includes(catParam)) {
+      setSelectedCats([catParam]);
+    }
+  }, [catParam]);
   const [priceRange, setPriceRange] = useState(null);
   const [radius, setRadius] = useState(25);
   const [showMobileFilters, setShowMobileFilters] = useState(false);

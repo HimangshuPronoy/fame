@@ -29,7 +29,7 @@ const CategorySection = () => {
         {categories.map((cat, i) => (
           <div 
             key={i} 
-            onClick={() => navigate('/listings')}
+            onClick={() => navigate(`/listings?cat=${encodeURIComponent(cat.title)}`)}
             className="category-card"
           >
             <div 
