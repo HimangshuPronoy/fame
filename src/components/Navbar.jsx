@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Search, Globe, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useStore } from '../hooks/useStore';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,6 +23,17 @@ const Navbar = () => {
         if (searchTerm.trim()) {
             navigate(`/listings?q=${encodeURIComponent(searchTerm)}`);
         }
+    }
+  };
+
+  const { user, profile, signOut } = useStore();
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate('/');
+    } catch (err) {
+      console.error("Logout error:", err);
     }
   };
 
@@ -104,26 +116,70 @@ const Navbar = () => {
             <Globe size={18} />
             MN / EN
           </div>
-          <Link to="/login" style={{ 
-            color: isScrolled || !isHome ? '#0F172A' : 'white', 
-            textDecoration: 'none', 
-            fontSize: '0.95rem', 
-            fontWeight: '700' 
-          }}>
-            Log In
-          </Link>
-          <button 
-            onClick={() => navigate('/login')}
-            className={isScrolled || !isHome ? "btn btn-primary" : "btn btn-glass"}
-            style={{ 
-              padding: '0.75rem 2rem', 
-              borderRadius: '14px',
-              boxShadow: isScrolled || !isHome ? '0 8px 20px rgba(239, 68, 68, 0.2)' : 'none'
-            }}
-          >
-            <Sparkles size={16} />
-            Join Fame
-          </button>
+          
+          {user ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+               <Link to="/dashboard" style={{ 
+                 display: 'flex', 
+                 alignItems: 'center', 
+                 gap: '0.75rem', 
+                 textDecoration: 'none',
+                 color: isScrolled || !isHome ? '#0F172A' : 'white' 
+               }}>
+                  <div style={{ 
+                    width: '36px', 
+                    height: '36px', 
+                    borderRadius: '50%', 
+                    background: 'var(--primary)', 
+                    color: 'white',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: '800',
+                    fontSize: '0.8rem'
+                  }}>
+                    {profile?.full_name?.charAt(0).toUpperCase() || 'U'}
+                  </div>
+                  <span style={{ fontWeight: '700', fontSize: '0.9rem' }}>{profile?.full_name?.split(' ')[0] || 'User'}</span>
+               </Link>
+               <button 
+                 onClick={handleLogout}
+                 style={{ 
+                   background: 'transparent', 
+                   border: 'none', 
+                   color: isScrolled || !isHome ? '#64748B' : 'rgba(255,255,255,0.8)',
+                   fontWeight: '700',
+                   cursor: 'pointer',
+                   fontSize: '0.9rem'
+                 }}
+               >
+                 Sign Out
+               </button>
+            </div>
+          ) : (
+            <>
+              <Link to="/login" style={{ 
+                color: isScrolled || !isHome ? '#0F172A' : 'white', 
+                textDecoration: 'none', 
+                fontSize: '0.95rem', 
+                fontWeight: '700' 
+              }}>
+                Log In
+              </Link>
+              <button 
+                onClick={() => navigate('/login')}
+                className={isScrolled || !isHome ? "btn btn-primary" : "btn btn-glass"}
+                style={{ 
+                  padding: '0.75rem 2rem', 
+                  borderRadius: '14px',
+                  boxShadow: isScrolled || !isHome ? '0 8px 20px rgba(239, 68, 68, 0.2)' : 'none'
+                }}
+              >
+                <Sparkles size={16} />
+                Join Fame
+              </button>
+            </>
+          )}
         </div>
       </div>
     </nav>

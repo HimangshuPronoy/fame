@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Check, Eye, EyeOff, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, Check, Eye, EyeOff, ShieldCheck, Loader2 } from 'lucide-react';
+import { useStore } from '../hooks/useStore';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { signIn, signUp } = useStore();
   const [isLogin, setIsLogin] = useState(true);
   const [showPass, setShowPass] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,14 +26,29 @@ const Login = () => {
     };
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!agreed) {
       alert("Please agree to the Terms & Privacy Policy to continue.");
       return;
     }
-    console.log("Auth Success:", formData);
-    navigate('/');
+    
+    setLoading(true);
+    setError(null);
+
+    try {
+      if (isLogin) {
+        await signIn(formData.email, formData.password);
+      } else {
+        await signUp(formData.email, formData.password, formData.name);
+        alert("Verification email sent! Please check your inbox.");
+      }
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -116,9 +136,24 @@ const Login = () => {
           <h1 style={{ fontSize: '2.2rem', fontWeight: '900', color: '#0F172A', marginBottom: '0.75rem', letterSpacing: '-1px' }}>
             {isLogin ? "Welcome Back" : "Start Discovering"}
           </h1>
-          <p style={{ color: '#64748B', marginBottom: '3rem', fontSize: '1rem', fontWeight: '500' }}>
+          <p style={{ color: '#64748B', marginBottom: '2rem', fontSize: '1rem', fontWeight: '500' }}>
             {isLogin ? "Enter your details to sign in." : "Create your account today."}
           </p>
+
+          {error && (
+            <div style={{ 
+              padding: '1rem', 
+              background: '#FEF2F2', 
+              color: '#DC2626', 
+              borderRadius: '12px', 
+              fontSize: '0.85rem', 
+              fontWeight: '600', 
+              marginBottom: '2rem',
+              border: '1px solid #FCA5A5'
+            }}>
+              {error}
+            </div>
+          )}
           
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {!isLogin && (
@@ -190,9 +225,10 @@ const Login = () => {
             <button 
               type="submit" 
               className="btn btn-primary" 
-              style={{ padding: '1.1rem', fontSize: '1rem', borderRadius: '16px', marginTop: '0.5rem' }}
+              disabled={loading}
+              style={{ padding: '1.1rem', fontSize: '1rem', borderRadius: '16px', marginTop: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}
             >
-              {isLogin ? "Sign In Now" : "Create Account"}
+              {loading ? <Loader2 className="spinning" size={20} /> : (isLogin ? "Sign In Now" : "Create Account")}
             </button>
           </form>
 
@@ -217,6 +253,9 @@ const Login = () => {
       <style>{`
         .auth-input::placeholder { color: #CBD5E1; }
         .btn:hover { opacity: 0.95; transform: translateY(-2px); }
+        .btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+        .spinning { animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
       `}</style>
     </div>
   );
