@@ -86,26 +86,29 @@ const Home = () => {
             <h1 style={{ 
               color: 'white', 
               marginBottom: '1rem',
-              fontSize: 'clamp(2.4rem, 6vw, 5rem)',
-              maxWidth: '900px'
+              fontSize: 'clamp(3rem, 7vw, 6rem)',
+              maxWidth: '1000px',
+              lineHeight: '1',
+              letterSpacing: '-0.04em'
             }}>
               Elevate Your <br className="desktop-only" />
-              <span style={{ fontStyle: 'italic', fontWeight: '300', opacity: 0.9 }}>Lifestyle</span> Discovery<span style={{ color: 'var(--primary)' }}>.</span>
+              <span style={{ fontStyle: 'italic', fontWeight: '300', color: 'var(--primary)', opacity: 1 }}>Lifestyle</span> Discovery<span style={{ color: 'white' }}>.</span>
             </h1>
             
             <p style={{ 
               color: 'white', 
-              fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', 
-              maxWidth: '600px', 
-              opacity: 0.85, 
-              lineHeight: '1.7', 
-              marginBottom: '2.5rem',
-              fontWeight: '400'
+              fontSize: 'clamp(1.1rem, 1.3vw, 1.2rem)', 
+              maxWidth: '700px', 
+              opacity: 0.9, 
+              lineHeight: '1.6', 
+              marginBottom: '3.5rem',
+              fontWeight: '500',
+              letterSpacing: '-0.01em'
             }}>
               Fame hand-verifies the world's most exclusive restaurants, secret nightspots, and elite wellness centers.
             </p>
             
-            <div className="hero-search-wrapper">
+            <div className="hero-search-wrapper" style={{ maxWidth: '850px' }}>
                 <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '1rem', padding: '0 1rem' }}>
                     <Search className="mobile-only" size={20} color="var(--text-muted)" />
                     <input 
