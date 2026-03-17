@@ -15,19 +15,22 @@ const TrendingScroller = () => {
   const doubleSpots = [...displaySpots, ...displaySpots];
 
   return (
-    <section style={{ padding: '10rem 0', background: 'white', overflow: 'hidden' }}>
+    <section style={{ padding: '10rem 0', background: 'var(--bg-subtle)', overflow: 'hidden' }}>
       <div className="container">
-        <div style={{ marginBottom: '5rem' }} className="responsive-flex">
+        <div style={{ marginBottom: '5rem', borderBottom: '1px solid var(--border-light)', paddingBottom: '2rem' }} className="responsive-flex">
           <div>
-            <span style={{ color: 'var(--primary)', fontWeight: '900', fontSize: '0.85rem', letterSpacing: '0.3rem' }}>HIGHLIGHTS</span>
-            <h2 style={{ marginTop: '1rem' }}>Trending This Week</h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+              <div style={{ width: '20px', height: '1px', background: 'var(--accent-gold)' }}></div>
+              <span style={{ color: 'var(--accent-gold)', fontWeight: '500', fontSize: '0.7rem', letterSpacing: '0.3em', textTransform: 'uppercase' }}>Highlights</span>
+            </div>
+            <h2 style={{ marginTop: '0' }}>Trending This Week</h2>
           </div>
           <button 
             onClick={() => navigate('/listings')}
-            className="btn btn-primary" 
-            style={{ padding: '1rem 2.5rem', borderRadius: '18px' }}
+            className="btn btn-outline" 
+            style={{ padding: '0.85rem 2rem' }}
           >
-            View All
+            View Collection
           </button>
         </div>
       </div>
@@ -36,8 +39,8 @@ const TrendingScroller = () => {
         <div className="trending-marquee-content">
           {loading ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '2rem' }}>
-              <Loader2 className="animate-spin" size={24} />
-              <span>Sycnronizing Trends...</span>
+              <Loader2 className="animate-spin" size={24} color="var(--primary)" />
+              <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontSize: '1.2rem' }}>Synchronizing Trends...</span>
             </div>
           ) : doubleSpots.map((spot, i) => (
             <div 
@@ -45,30 +48,30 @@ const TrendingScroller = () => {
               onClick={() => navigate('/listings')}
               style={{ 
                 flexShrink: 0, 
-                width: '380px', 
+                width: '400px', 
                 position: 'relative', 
-                borderRadius: '32px', 
+                borderRadius: '8px', 
+                border: '1px solid rgba(10,10,10,0.05)',
                 overflow: 'hidden', 
                 cursor: 'pointer',
                 margin: '0 1.5rem',
-                boxShadow: '0 20px 40px rgba(0,0,0,0.05)'
               }}
               className="trending-card"
             >
               <div style={{ overflow: 'hidden', aspectRatio: '4/5' }}>
-                <img src={spot.image || spot.img} alt={spot.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s var(--ease-premium)' }} />
+                <img src={spot.image || spot.img} alt={spot.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 1.2s var(--ease-slow)' }} className="trending-img" />
               </div>
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2.5rem', background: 'linear-gradient(to top, rgba(0,0,0,0.95), transparent)', color: 'white' }}>
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2.5rem', background: 'linear-gradient(to top, rgba(10,10,10,0.95), transparent)', color: 'white' }}>
                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: '900', padding: '0.35rem 0.75rem', background: 'var(--primary)', borderRadius: '6px', textTransform: 'uppercase' }}>{spot.category || spot.cat}</span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.9rem', fontWeight: '800' }}>
-                        <Star size={14} fill="var(--accent-gold)" color="var(--accent-gold)" />
+                    <span style={{ fontSize: '0.65rem', fontWeight: '500', padding: '0.35rem 0.8rem', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '2px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{spot.category || spot.cat}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.8rem', fontWeight: '400', letterSpacing: '0.1em' }}>
+                        <Star size={12} fill="var(--accent-gold)" color="var(--accent-gold)" />
                         {spot.rating || spot.score || '5.0'}
                     </div>
                  </div>
-                 <h4 style={{ fontSize: '1.6rem', fontWeight: '900', letterSpacing: '-0.5px' }}>{spot.name}</h4>
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', opacity: 0.8, marginTop: '0.75rem', fontWeight: '600' }}>
-                    <MapPin size={14} color="var(--primary)" /> {spot.location || spot.loc}
+                 <h4 style={{ fontSize: '1.75rem', letterSpacing: '0', color: 'white', marginBottom: '0.5rem', marginTop: '0.5rem' }}>{spot.name}</h4>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', opacity: 0.8, marginTop: '0', fontWeight: '300' }}>
+                    <MapPin size={12} color="var(--accent-gold)" /> {spot.location || spot.loc}
                  </div>
               </div>
             </div>
@@ -88,20 +91,20 @@ const TrendingScroller = () => {
         }
         .trending-marquee-content {
           display: flex;
-          animation: trending-marquee 50s linear infinite;
+          animation: trending-marquee 60s linear infinite;
         }
         .trending-marquee:hover .trending-marquee-content {
           animation-play-state: paused;
         }
         @media (max-width: 768px) {
-          .trending-card { width: 300px !important; }
-          .trending-marquee-content { animation-duration: 30s; }
+          .trending-card { width: 300px !important; margin: 0 1rem !important; }
+          .trending-marquee-content { animation-duration: 40s; }
         }
-        .trending-card:hover img { 
-          transform: scale(1.1); 
+        .trending-card {
+           transition: all 0.6s var(--ease-slow);
         }
-        .trending-card:hover {
-          box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+        .trending-card:hover .trending-img { 
+          transform: scale(1.05); 
         }
       `}</style>
     </section>

@@ -46,86 +46,76 @@ const Home = () => {
 
   return (
     <div className="home-root">
-      {/* Hero Section */}
-      <section className="hero-section" style={{ height: '100vh', minHeight: '600px', position: 'relative', overflow: 'hidden', background: '#000' }}>
-        {/* Background Layers */}
+      {/* Luxury Cinematic Hero Section */}
+      <section className="hero-section" style={{ height: '100vh', minHeight: '600px', position: 'relative', overflow: 'hidden', background: 'var(--primary)' }}>
+        {/* Background Layers - Slower, more subtle cross-fades */}
         {backgroundImages.map((img, idx) => (
           <div 
             key={idx}
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url(${img})`,
+              backgroundImage: `linear-gradient(to bottom, rgba(10,10,10,0.4), rgba(10,10,10,0.8)), url(${img})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               opacity: idx === bgIndex ? 1 : 0,
-              transition: 'opacity 2.5s ease-in-out',
+              transition: 'opacity 3.5s var(--ease-slow)',
               zIndex: idx === bgIndex ? 1 : (idx === prevBgIndex ? 0 : -1)
             }}
           />
         ))}
 
         <div className="container" style={{ height: '100%', display: 'flex', alignItems: 'center', position: 'relative', zIndex: 10 }}>
-          <div className="hero-content reveal" style={{ marginTop: '2.5rem' }}>
+          <div className="hero-content fade-in" style={{ marginTop: '2.5rem' }}>
             <div style={{ 
               display: 'inline-flex', 
               alignItems: 'center', 
-              gap: '0.75rem', 
-              background: 'rgba(255,255,255,0.1)', 
-              backdropFilter: 'blur(12px)', 
-              padding: '0.5rem 1rem', 
-              borderRadius: '40px', 
-              border: '1px solid rgba(255,255,255,0.15)', 
-              marginBottom: '0.5rem',
-              width: 'fit-content'
+              gap: '1rem', 
+              marginBottom: '1rem',
             }}>
-                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--primary)', boxShadow: '0 0 10px var(--primary)' }}></div>
-                <span style={{ fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.15em', color: 'white' }}>EVERYTHING IS POSSIBLE</span>
+                <div style={{ width: '40px', height: '1px', background: 'var(--accent-gold)' }}></div>
+                <span style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', color: 'var(--accent-gold)', textTransform: 'uppercase' }}>Curated Excellence</span>
             </div>
             
             <h1 style={{ 
               color: 'white', 
-              marginBottom: '1rem',
-              fontSize: 'clamp(3rem, 7vw, 6rem)',
+              marginBottom: '1.5rem',
               maxWidth: '1000px',
-              lineHeight: '1',
-              letterSpacing: '-0.04em'
             }}>
-              Elevate Your <br className="desktop-only" />
-              <span style={{ fontStyle: 'italic', fontWeight: '300', color: 'var(--primary)', opacity: 1 }}>Lifestyle</span> Discovery<span style={{ color: 'white' }}>.</span>
+              Discover the <br className="desktop-only" />
+              <span style={{ fontStyle: 'italic', color: 'var(--bg-main)', opacity: 0.9 }}>Extraordinary</span>.
             </h1>
             
             <p style={{ 
-              color: 'white', 
-              fontSize: 'clamp(1.1rem, 1.3vw, 1.2rem)', 
-              maxWidth: '700px', 
-              opacity: 0.9, 
-              lineHeight: '1.6', 
-              marginBottom: '3.5rem',
-              fontWeight: '500',
-              letterSpacing: '-0.01em'
+              color: 'var(--bg-main)', 
+              fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', 
+              maxWidth: '600px', 
+              opacity: 0.8, 
+              lineHeight: '1.8', 
+              marginBottom: '4rem',
+              fontWeight: '300',
             }}>
-              Fame hand-verifies the world's most exclusive restaurants, secret nightspots, and elite wellness centers.
+              Fame hand-verifies the world's most exclusive restaurants, secret nightspots, and elite wellness centers. Welcome to the pinnacle of lifestyle discovery.
             </p>
             
-            <div className="hero-search-wrapper" style={{ maxWidth: '850px' }}>
-                <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '1rem', padding: '0 1rem' }}>
-                    <Search className="mobile-only" size={20} color="var(--text-muted)" />
+            <div className="hero-search-wrapper" style={{ maxWidth: '800px', background: 'rgba(10,10,10,0.4)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '1rem', padding: '0 1.5rem' }}>
+                    <Search className="mobile-only" size={18} color="rgba(255,255,255,0.5)" />
                     <input 
                       type="text" 
                       placeholder="What are you looking for?" 
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       onKeyDown={handleSearch}
-                      style={{ border: 'none', background: 'transparent', width: '100%', fontSize: '1rem', outline: 'none', fontWeight: '500' }}
+                      style={{ border: 'none', background: 'transparent', width: '100%', fontSize: '0.95rem', outline: 'none', fontWeight: '300', color: 'white' }}
                     />
                 </div>
                 <button 
                   onClick={handleSearch}
-                  className="btn btn-primary" 
-                  style={{ padding: '0.85rem 2rem', borderRadius: '14px', whiteSpace: 'nowrap' }}
+                  className="btn" 
+                  style={{ background: 'white', color: 'var(--primary)', padding: '1rem 2.5rem', borderRadius: '2px', whiteSpace: 'nowrap', fontWeight: '600' }}
                 >
-                  Find Now
+                  Explore Now
                 </button>
             </div>
           </div>

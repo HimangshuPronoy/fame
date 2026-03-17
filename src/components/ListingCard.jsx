@@ -14,10 +14,9 @@ const ListingCard = ({ item }) => {
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%',
-        borderRadius: '24px',
-        border: '1px solid rgba(15, 23, 42, 0.05)',
-        background: 'white',
-        boxShadow: '0 10px 30px -10px rgba(15, 23, 42, 0.08)'
+        borderRadius: 'var(--radius-lg)',
+        border: '1px solid var(--border-light)',
+        background: 'transparent',
       }}
       onClick={() => navigate('/listings')}
     >
@@ -25,39 +24,38 @@ const ListingCard = ({ item }) => {
         <img 
           src={item.image} 
           alt={item.name} 
-          style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 1s var(--ease-premium)' }}
+          className="card-image"
         />
         
         {/* Top Overlay Actions */}
         <div style={{ position: 'absolute', top: '1.25rem', left: '1.25rem', display: 'flex', gap: '0.5rem' }}>
           <div style={{ 
-            background: 'rgba(16, 185, 129, 0.9)', 
+            background: 'rgba(10, 10, 10, 0.6)', 
             backdropFilter: 'blur(10px)',
             color: 'white', 
             fontSize: '0.65rem', 
-            fontWeight: '800', 
-            padding: '0.4rem 0.75rem', 
-            borderRadius: '100px',
-            letterSpacing: '0.05em',
+            fontWeight: '600', 
+            padding: '0.4rem 0.8rem', 
+            borderRadius: '2px',
+            letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            border: '1px solid rgba(255,255,255,0.2)'
+            border: '1px solid rgba(255,255,255,0.1)'
           }}>
             Open
           </div>
           {item.isFeatured && (
             <div style={{ 
-              background: 'rgba(255, 255, 255, 0.2)', 
-              color: 'white', 
+              background: 'rgba(212, 175, 55, 0.8)', 
+              color: 'var(--primary)', 
               fontSize: '0.65rem', 
-              fontWeight: '800', 
-              padding: '0.4rem 0.75rem', 
-              borderRadius: '100px',
+              fontWeight: '600', 
+              padding: '0.4rem 0.8rem', 
+              borderRadius: '2px',
               textTransform: 'uppercase',
               backdropFilter: 'blur(12px)',
-              letterSpacing: '0.05em',
-              border: '1px solid rgba(255,255,255,0.3)'
+              letterSpacing: '0.1em',
             }}>
-              Featured
+              Curated
             </div>
           )}
         </div>
@@ -71,57 +69,57 @@ const ListingCard = ({ item }) => {
             right: '1.25rem',
             width: '38px',
             height: '38px',
-            borderRadius: '14px',
-            background: 'rgba(15, 23, 42, 0.3)',
+            borderRadius: '2px',
+            background: 'rgba(10, 10, 10, 0.4)',
             backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255,255,255,0.2)',
+            border: '1px solid rgba(255,255,255,0.15)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            color: isLiked ? '#ef4444' : 'white',
+            color: isLiked ? 'var(--accent-gold)' : 'white',
             zIndex: 10,
-            transition: 'all 0.3s var(--ease-premium)'
+            transition: 'all 0.4s var(--ease-slow)'
           }}
         >
-          <Heart size={18} fill={isLiked ? "currentColor" : "none"} strokeWidth={2.5} />
+          <Heart size={16} fill={isLiked ? "currentColor" : "none"} strokeWidth={1.5} />
         </button>
       </div>
 
       <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-           <span style={{ fontSize: '0.7rem', fontWeight: '900', color: 'var(--primary)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{item.category}</span>
+           <span style={{ fontSize: '0.65rem', fontWeight: '500', color: 'var(--text-muted)', letterSpacing: '0.15em', textTransform: 'uppercase' }}>{item.category}</span>
            <div style={{ display: 'flex', gap: '2px', marginLeft: 'auto' }}>
-             {[1,2,3,4,5].map(i => <Star key={i} size={10} fill={i <= 4 ? "var(--accent-gold)" : "none"} color={i <= 4 ? "var(--accent-gold)" : "#E2E8F0"} />)}
+             {[1,2,3,4,5].map(i => <Star key={i} size={10} fill={i <= 4 ? "var(--accent-gold)" : "none"} color="transparent" />)}
            </div>
         </div>
 
-        <h3 style={{ fontSize: '1.2rem', fontWeight: '900', color: '#0F172A', marginBottom: '0.75rem', lineHeight: '1.25', letterSpacing: '-0.02em' }}>{item.name}</h3>
+        <h3 style={{ fontSize: '1.4rem', color: 'var(--primary)', marginBottom: '0.5rem', lineHeight: '1.2' }}>{item.name}</h3>
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '2rem' }}>
-          <MapPin size={14} color="var(--primary)" strokeWidth={2.5} />
-          <span style={{ fontWeight: '500' }}>{item.location}</span>
+          <MapPin size={12} color="var(--primary)" strokeWidth={1.5} />
+          <span style={{ fontWeight: '300', letterSpacing: '0.01em' }}>{item.location}</span>
         </div>
 
-        <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-light)', paddingTop: '1.25rem' }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.3rem' }}>
-            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: '800', letterSpacing: '0.05em' }}>FROM</span>
-            <span style={{ fontSize: '1.5rem', fontWeight: '900', color: '#0F172A' }}>${item.price}</span>
+            <span style={{ fontSize: '1.25rem', fontFamily: 'Playfair Display, serif', color: 'var(--primary)' }}>${item.price}</span>
+            <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: '400', letterSpacing: '0.05em' }}>/ AVG</span>
           </div>
           
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button 
-                className="icon-btn-premium" 
-                onClick={(e) => { e.stopPropagation(); alert('Calling Establishment...'); }}
+                className="icon-btn-luxury" 
+                onClick={(e) => { e.stopPropagation(); alert('Connecting to Concierge...'); }}
             >
-                <Phone size={16} strokeWidth={2.5} />
+                <Phone size={14} strokeWidth={1.5} />
             </button>
             <button 
-                className="icon-btn-premium"
+                className="icon-btn-luxury"
                 onClick={(e) => { e.stopPropagation(); navigate('/listings'); }}
-                style={{ background: 'var(--primary)', color: 'white', borderColor: 'var(--primary)' }}
+                style={{ background: 'var(--primary)', color: 'var(--accent-gold)', borderColor: 'var(--primary)' }}
             >
-                <ArrowRight size={18} strokeWidth={2.5} />
+                <ArrowRight size={14} strokeWidth={1.5} />
             </button>
           </div>
         </div>
@@ -129,31 +127,32 @@ const ListingCard = ({ item }) => {
       
       <style>{`
         .listing-card-premium {
-          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.8s var(--ease-slow);
         }
         .listing-card-premium:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 50px 100px -20px rgba(15, 23, 42, 0.15);
+          transform: translateY(-4px);
+          border-color: var(--primary);
         }
         .listing-card-premium:hover img {
           transform: scale(1.05);
         }
-        .icon-btn-premium {
-          width: 44px;
-          height: 44px;
-          border-radius: 16px;
-          background: white;
-          border: 1.5px solid rgba(15, 23, 42, 0.08);
+        .icon-btn-luxury {
+          width: 36px;
+          height: 36px;
+          border-radius: 2px;
+          background: transparent;
+          border: 1px solid var(--border-light);
           display: flex;
           align-items: center;
-          justifyContent: center;
+          justify-content: center;
           cursor: pointer;
-          transition: all 0.3s var(--ease-premium);
-          color: var(--text-secondary);
+          transition: all 0.4s var(--ease-slow);
+          color: var(--primary);
         }
-        .icon-btn-premium:hover {
-          transform: scale(1.05);
-          box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        .icon-btn-luxury:hover {
+          background: var(--primary);
+          color: white;
+          border-color: var(--primary);
         }
       `}</style>
     </div>

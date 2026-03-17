@@ -5,23 +5,25 @@ const CategorySection = () => {
   const navigate = useNavigate();
   
   const categories = [
-    { title: 'Restaurant', icon: <Utensils size={32} />, bg: '#FFF5F5', color: '#B91C1C', desc: 'Savor world-class cuisines and hidden local eateries.' },
-    { title: 'Nightlife', icon: <GlassWater size={32} />, bg: '#FDF2F8', color: '#BE185D', desc: 'Experience vibrant energy at the city\'s most exclusive clubs.' },
-    { title: 'Fitness', icon: <Dumbbell size={32} />, bg: '#EFF6FF', color: '#1D4ED8', desc: 'Train at elite facilities with state-of-the-art equipment.' },
-    { title: 'Shopping', icon: <ShoppingBag size={32} />, bg: '#F5F3FF', color: '#6D28D9', desc: 'Discover curated boutiques and luxury global brands.' },
-    { title: 'Travel', icon: <Plane size={32} />, bg: '#ECFDF5', color: '#047857', desc: 'Plan your next escape with verified local guides.' },
-    { title: 'Beauty', icon: <Sparkles size={32} />, bg: '#FFFBEB', color: '#B45309', desc: 'Rejuvenate at premium spas and elite wellness centers.' },
+    { title: 'Restaurant', icon: <Utensils size={28} strokeWidth={1.5} />, desc: 'World-class cuisines & hidden eateries.' },
+    { title: 'Nightlife', icon: <GlassWater size={28} strokeWidth={1.5} />, desc: 'Exclusive access to vibrant city energy.' },
+    { title: 'Fitness', icon: <Dumbbell size={28} strokeWidth={1.5} />, desc: 'Train at state-of-the-art elite facilities.' },
+    { title: 'Shopping', icon: <ShoppingBag size={28} strokeWidth={1.5} />, desc: 'Curated boutiques & luxury global brands.' },
+    { title: 'Travel', icon: <Plane size={28} strokeWidth={1.5} />, desc: 'Verified guides for your next grand escape.' },
+    { title: 'Wellness', icon: <Sparkles size={28} strokeWidth={1.5} />, desc: 'Rejuvenate at premium, verified spas.' },
   ];
 
   return (
     <div className="container" style={{ overflow: 'hidden' }}>
-      <div style={{ marginBottom: 'clamp(3rem, 5vw, 5rem)' }} className="responsive-flex">
-        <div style={{ flex: 1, minWidth: '250px' }}>
-          <span style={{ color: 'var(--primary)', fontWeight: '900', fontSize: '0.8rem', letterSpacing: '0.3rem', textTransform: 'uppercase' }}>Discover Locally</span>
-          <h2 style={{ marginTop: '1.5rem', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>Searching is more <br className="mobile-only" /> easy by category</h2>
+      <div style={{ marginBottom: 'clamp(4rem, 8vw, 6rem)', textAlign: 'center', maxWidth: '800px', margin: '0 auto clamp(4rem, 8vw, 6rem)' }} className="reveal">
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+            <div style={{ width: '30px', height: '1px', background: 'var(--accent-gold)' }}></div>
+            <span style={{ color: 'var(--accent-gold)', fontWeight: '500', fontSize: '0.75rem', letterSpacing: '0.4em', textTransform: 'uppercase' }}>Curation by Excellence</span>
+            <div style={{ width: '30px', height: '1px', background: 'var(--accent-gold)' }}></div>
         </div>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '400px', alignSelf: 'center', minWidth: '250px' }}>
-          Explore verified establishments curated for excellence and reviewed by the local community.
+        <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>The <span className="text-gradient">Signatures</span> of Local Culture.</h2>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', margin: '1.5rem auto 0', lineHeight: '1.8', maxWidth: '600px', fontWeight: '300' }}>
+          Explore verified establishments curated for excellence, from Michelin-starred dining to exclusive wellness sanctuaries.
         </p>
       </div>
 
@@ -31,28 +33,25 @@ const CategorySection = () => {
             key={i} 
             onClick={() => navigate(`/listings?cat=${encodeURIComponent(cat.title)}`)}
             className="category-card"
-            style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', width: '100%', boxSizing: 'border-box' }}
           >
             <div 
               className="icon-box"
               style={{ 
-                width: '90px', 
-                height: '90px', 
-                borderRadius: '28px', 
-                background: cat.bg, 
+                width: '60px', 
+                height: '60px', 
+                background: 'transparent',
                 display: 'flex', 
                 alignItems: 'center', 
                 justifyContent: 'center',
-                color: cat.color,
-                transition: 'all 0.4s var(--ease-premium)',
+                color: 'var(--primary)',
                 flexShrink: 0
               }}
             >
               {cat.icon}
             </div>
             <div style={{ flex: 1 }}>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: '900', marginBottom: '0.75rem', color: '#0F172A' }}>{cat.title}</h3>
-              <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', fontWeight: '500', lineHeight: '1.5' }}>{cat.desc}</p>
+              <h3 style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>{cat.title}</h3>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: '300', lineHeight: '1.6', letterSpacing: '0.01em' }}>{cat.desc}</p>
             </div>
           </div>
         ))}
