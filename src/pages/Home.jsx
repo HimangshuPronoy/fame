@@ -66,26 +66,27 @@ const Home = () => {
         ))}
 
         <div className="container" style={{ height: '100%', display: 'flex', alignItems: 'center', position: 'relative', zIndex: 10 }}>
-          <div className="hero-content reveal">
+          <div className="hero-content reveal" style={{ marginTop: '2.5rem' }}>
             <div style={{ 
               display: 'inline-flex', 
               alignItems: 'center', 
-              gap: '1rem', 
+              gap: '0.75rem', 
               background: 'rgba(255,255,255,0.1)', 
               backdropFilter: 'blur(12px)', 
-              padding: '0.6rem 1.25rem', 
+              padding: '0.5rem 1rem', 
               borderRadius: '40px', 
-              border: '1px solid rgba(255,255,255,0.2)', 
-              marginBottom: '1rem' 
+              border: '1px solid rgba(255,255,255,0.15)', 
+              marginBottom: '0.5rem',
+              width: 'fit-content'
             }}>
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--primary)', boxShadow: '0 0 10px var(--primary)' }}></div>
-                <span style={{ fontSize: '0.75rem', fontWeight: '800', letterSpacing: '0.15em', color: 'white' }}>EVERYTHING IS POSSIBLE</span>
+                <span style={{ fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.15em', color: 'white' }}>EVERYTHING IS POSSIBLE</span>
             </div>
             
             <h1 style={{ 
               color: 'white', 
-              marginBottom: '1.5rem',
-              fontSize: 'clamp(2.8rem, 6vw, 5.5rem)',
+              marginBottom: '1rem',
+              fontSize: 'clamp(2.4rem, 6vw, 5rem)',
               maxWidth: '900px'
             }}>
               Elevate Your <br className="desktop-only" />
@@ -94,12 +95,12 @@ const Home = () => {
             
             <p style={{ 
               color: 'white', 
-              fontSize: 'clamp(1rem, 1.5vw, 1.25rem)', 
-              maxWidth: '650px', 
-              opacity: 0.9, 
-              lineHeight: '1.8', 
-              marginBottom: '3rem',
-              fontWeight: '500'
+              fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', 
+              maxWidth: '600px', 
+              opacity: 0.85, 
+              lineHeight: '1.7', 
+              marginBottom: '2.5rem',
+              fontWeight: '400'
             }}>
               Fame hand-verifies the world's most exclusive restaurants, secret nightspots, and elite wellness centers.
             </p>
@@ -119,7 +120,7 @@ const Home = () => {
                 <button 
                   onClick={handleSearch}
                   className="btn btn-primary" 
-                  style={{ padding: '1rem 2.5rem', borderRadius: '14px', whiteSpace: 'nowrap' }}
+                  style={{ padding: '0.85rem 2rem', borderRadius: '14px', whiteSpace: 'nowrap' }}
                 >
                   Find Now
                 </button>
@@ -128,9 +129,9 @@ const Home = () => {
         </div>
       </section>
 
-      <section id="categories" style={{ padding: 'var(--section-padding) 0', background: 'var(--bg-subtle)' }}>
+      <div id="categories" style={{ padding: 'var(--section-padding) 0', background: 'var(--bg-subtle)' }}>
         <CategorySection />
-      </section>
+      </div>
 
       <div id="trending">
         <TrendingScroller />

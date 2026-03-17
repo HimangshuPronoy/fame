@@ -56,7 +56,7 @@ body {
 .container {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 2.5rem;
+  padding: 0 5%;
   width: 100%;
 }
 
@@ -299,12 +299,12 @@ h3 { font-size: 1.5rem; font-weight: 700; }
 }
 
 /* Responsive Utility Classes */
-.desktop-only { display: flex !important; }
+.desktop-only { display: block; }
 .mobile-only { display: none !important; }
 
 @media (max-width: 1024px) {
   .desktop-only { display: none !important; }
-  .mobile-only { display: flex !important; }
+  .mobile-only { display: block; }
 }
 
 .responsive-flex {
@@ -326,9 +326,10 @@ h3 { font-size: 1.5rem; font-weight: 700; }
 .hero-content {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 1.5rem;
   max-width: 900px;
   width: 100%;
+  padding-top: 4rem; /* Offset for collision */
 }
 
 .hero-search-wrapper {
