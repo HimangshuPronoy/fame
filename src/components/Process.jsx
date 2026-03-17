@@ -20,24 +20,27 @@ const Process = () => {
   ];
 
   return (
-    <section style={{ padding: '12rem 0', background: 'var(--bg-subtle)' }}>
+    <section style={{ padding: 'var(--section-padding) 0', background: 'var(--bg-subtle)' }}>
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '8rem' }}>
           <span style={{ color: 'var(--primary)', fontWeight: '900', fontSize: '0.8rem', letterSpacing: '0.3rem' }}>THREE SIMPLE STEPS</span>
           <h2 style={{ marginTop: '2rem' }}>Experience the World of Fame</h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '4rem', position: 'relative' }}>
-          {/* Connector Line */}
-          <div style={{ 
-            position: 'absolute', 
-            top: '40px', 
-            left: '10%', 
-            right: '10%', 
-            height: '2px', 
-            background: 'linear-gradient(to right, transparent, var(--border-light), transparent)',
-            zIndex: 0
-          }}></div>
+        <div className="grid-3" style={{ position: 'relative' }}>
+          {/* Connector Line - Hidden on mobile */}
+          <div 
+            className="process-connector"
+            style={{ 
+              position: 'absolute', 
+              top: '40px', 
+              left: '10%', 
+              right: '10%', 
+              height: '2px', 
+              background: 'linear-gradient(to right, transparent, var(--border-light), transparent)',
+              zIndex: 0,
+            }}
+          ></div>
 
           {steps.map((s, i) => (
             <div key={i} style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
@@ -62,6 +65,11 @@ const Process = () => {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 1024px) {
+          .process-connector { display: none; }
+        }
+      `}</style>
     </section>
   );
 };

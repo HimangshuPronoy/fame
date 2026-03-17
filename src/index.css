@@ -22,6 +22,20 @@
   
   /* Transitions */
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Responsive Spacing */
+  --section-padding: 10rem;
+}
+
+@media (max-width: 1024px) {
+  :root { --section-padding: 8rem; }
+}
+
+@media (max-width: 768px) {
+  :root { 
+    --section-padding: 6rem; 
+    --nav-height: 70px;
+  }
 }
 
 * {
@@ -180,6 +194,28 @@ h3 { font-size: 1.5rem; font-weight: 700; }
   .listing-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Global Responsive Grid Utility */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .grid-4, .grid-3 { grid-template-columns: 1fr; }
 }
 
 .card-image-container {

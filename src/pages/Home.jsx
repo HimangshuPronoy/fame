@@ -186,25 +186,35 @@ const Home = () => {
       <Features />
       <Process />
 
-      <section style={{ padding: '12rem 0', overflow: 'hidden' }}>
-        <div className="container" style={{ display: 'flex', gap: '6rem', alignItems: 'center' }}>
-          <div style={{ flex: 1 }} className="reveal">
+      <section style={{ padding: 'var(--section-padding) 0', overflow: 'hidden' }}>
+        <div className="container" style={{ 
+          display: 'flex', 
+          gap: '6rem', 
+          alignItems: 'center',
+          flexDirection: window.innerWidth < 1024 ? 'column' : 'row'
+        }}>
+          <div style={{ flex: 1, textAlign: window.innerWidth < 1024 ? 'center' : 'left' }} className="reveal">
             <span style={{ color: 'var(--primary)', fontWeight: '900', fontSize: '0.8rem', letterSpacing: '0.3rem' }}>PREMIUM CURATION</span>
             <h2 style={{ marginTop: '2rem', marginBottom: '2.5rem' }}>Only the <span className="text-gradient">Best</span> Makes the Cut.</h2>
             <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginBottom: '4rem', lineHeight: '1.8' }}>
               We don't list every place. We list the right places. Our 'Excellence Council' personally visits and verifies every establishment before it earns the Fame mark.
             </p>
-            <div style={{ display: 'flex', gap: '3rem' }}>
+            <div style={{ 
+              display: 'flex', 
+              gap: '3rem',
+              justifyContent: window.innerWidth < 1024 ? 'center' : 'flex-start',
+              flexWrap: 'wrap'
+            }}>
                 <div>
-                    <h4 style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--primary)' }}>5.8k+</h4>
+                    <h4 style={{ fontSize: window.innerWidth < 768 ? '1.8rem' : '2.5rem', fontWeight: '900', color: 'var(--primary)' }}>5.8k+</h4>
                     <span style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--text-muted)' }}>VERIFIED SPOTS</span>
                 </div>
                 <div>
-                    <h4 style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--primary)' }}>12</h4>
+                    <h4 style={{ fontSize: window.innerWidth < 768 ? '1.8rem' : '2.5rem', fontWeight: '900', color: 'var(--primary)' }}>12</h4>
                     <span style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--text-muted)' }}>GLOBAL CITIES</span>
                 </div>
                 <div>
-                    <h4 style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--primary)' }}>24/7</h4>
+                    <h4 style={{ fontSize: window.innerWidth < 768 ? '1.8rem' : '2.5rem', fontWeight: '900', color: 'var(--primary)' }}>24/7</h4>
                     <span style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--text-muted)' }}>ACCESS HOOKS</span>
                 </div>
             </div>
@@ -247,10 +257,20 @@ const Home = () => {
 
       <Testimonials />
 
-      <section style={{ padding: '8rem 0', borderTop: '1px solid var(--border-light)' }}>
+      <section style={{ padding: 'var(--section-padding) 0', borderTop: '1px solid var(--border-light)' }}>
         <div className="container" style={{ textAlign: 'center' }}>
             <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '900', letterSpacing: '0.4rem' }}>TRUSTED BY GLOBAL VISIONARIES</span>
-            <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '6rem', marginTop: '6rem', opacity: 0.3, fontSize: '2rem', fontWeight: '900', letterSpacing: '2px' }}>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              flexWrap: 'wrap', 
+              gap: window.innerWidth < 768 ? '3rem' : '6rem', 
+              marginTop: '6rem', 
+              opacity: 0.3, 
+              fontSize: window.innerWidth < 768 ? '1.2rem' : '2rem', 
+              fontWeight: '900', 
+              letterSpacing: '2px' 
+            }}>
                 <span>GOOGLE</span>
                 <span>META</span>
                 <span>NETFLIX</span>
@@ -259,13 +279,18 @@ const Home = () => {
         </div>
       </section>
 
-      <section style={{ padding: '12rem 0', background: '#111827', color: 'white', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ padding: 'var(--section-padding) 0', background: '#111827', color: 'white', position: 'relative', overflow: 'hidden' }}>
         <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 10 }}>
-          <h2 style={{ fontSize: '4.5rem', color: 'white', marginBottom: '2.5rem' }}>Ready to <span style={{ color: 'var(--primary)' }}>Fame</span> your city?</h2>
-          <p style={{ fontSize: '1.4rem', opacity: 0.7, marginBottom: '5rem', maxWidth: '700px', margin: '0 auto 5rem' }}>
+          <h2 style={{ fontSize: window.innerWidth < 768 ? '2.5rem' : '4.5rem', color: 'white', marginBottom: '2.5rem' }}>Ready to <span style={{ color: 'var(--primary)' }}>Fame</span> your city?</h2>
+          <p style={{ fontSize: window.innerWidth < 768 ? '1.1rem' : '1.4rem', opacity: 0.7, marginBottom: '5rem', maxWidth: '700px', margin: '0 auto 5rem' }}>
             Join 50k+ explorers who are redefining their lifestyle discovery through verified curation.
           </p>
-          <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }}>
+          <div style={{ 
+            display: 'flex', 
+            gap: '2rem', 
+            justifyContent: 'center',
+            flexDirection: window.innerWidth < 640 ? 'column' : 'row'
+          }}>
             <button 
                 onClick={() => navigate('/login')}
                 className="btn btn-primary" 

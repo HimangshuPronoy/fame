@@ -14,10 +14,10 @@ const Testimonials = () => {
   const doubleReviews = [...reviews, ...reviews];
 
   return (
-    <section style={{ padding: '10rem 0', background: 'white', overflow: 'hidden' }}>
+    <section style={{ padding: 'var(--section-padding) 0', background: 'white', overflow: 'hidden' }}>
       <div className="container" style={{ marginBottom: '5rem', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>Loved by Explorers</h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>
+        <h2 style={{ fontSize: window.innerWidth < 768 ? '2.5rem' : '3.5rem', marginBottom: '1.5rem' }}>Loved by Explorers</h2>
+        <p style={{ color: 'var(--text-secondary)', fontSize: window.innerWidth < 768 ? '1rem' : '1.2rem', maxWidth: '600px', margin: '0 auto' }}>
           Hear from our global community of lifestyle enthusiasts.
         </p>
       </div>

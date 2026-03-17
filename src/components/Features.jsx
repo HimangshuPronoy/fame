@@ -25,7 +25,7 @@ const Features = () => {
   ];
 
   return (
-    <section style={{ background: '#F8FAFC', padding: '10rem 0' }}>
+    <section style={{ background: '#F8FAFC', padding: 'var(--section-padding) 0' }}>
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
           <span style={{ color: 'var(--primary)', fontWeight: '900', fontSize: '0.85rem', letterSpacing: '0.3rem', textTransform: 'uppercase' }}>Our Core Value</span>
@@ -35,7 +35,7 @@ const Features = () => {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2.5rem' }}>
+        <div className="grid-4">
           {features.map((f, i) => (
             <div 
               key={i} 
