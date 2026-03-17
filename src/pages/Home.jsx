@@ -47,7 +47,7 @@ const Home = () => {
   return (
     <div className="home-root">
       {/* Hero Section */}
-      <section className="hero-section" style={{ height: '90vh', minHeight: '600px', position: 'relative', overflow: 'hidden', background: '#000' }}>
+      <section className="hero-section" style={{ height: '100vh', minHeight: '600px', position: 'relative', overflow: 'hidden', background: '#000' }}>
         {/* Background Layers */}
         {backgroundImages.map((img, idx) => (
           <div 
