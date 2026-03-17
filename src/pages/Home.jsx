@@ -11,6 +11,7 @@ import { Search, MapPin, Compass, Play } from 'lucide-react';
 const Home = () => {
   const navigate = useNavigate();
   const [bgIndex, setBgIndex] = useState(0);
+  const [prevBgIndex, setPrevBgIndex] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
   const backgroundImages = [
@@ -27,10 +28,11 @@ const Home = () => {
   useEffect(() => {
     const length = backgroundImages.length;
     const timer = setInterval(() => {
+      setPrevBgIndex(bgIndex);
       setBgIndex((prev) => (prev + 1) % length);
-    }, 5000);
+    }, 6000); // Slightly longer for a more relaxed premium feel
     return () => clearInterval(timer);
-  }, [backgroundImages.length]);
+  }, [bgIndex, backgroundImages.length]);
 
   const handleSearch = (e) => {
     if (e.key === 'Enter' || e.type === 'click') {
@@ -47,17 +49,32 @@ const Home = () => {
       <section 
         style={{ 
           height: '100vh',
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url(${backgroundImages[bgIndex]})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
           display: 'flex',
           alignItems: 'center',
-          transition: 'background-image 2.5s cubic-bezier(0.16, 1, 0.3, 1)',
           color: 'white',
           padding: 0,
-          position: 'relative'
+          position: 'relative',
+          overflow: 'hidden',
+          background: '#0F172A' // Dark fallback
         }}
       >
+        {/* Background Layers for Smooth Cross-fade */}
+        {backgroundImages.map((img, idx) => (
+          <div 
+            key={idx}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.7)), url(${img})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              opacity: idx === bgIndex ? 1 : 0,
+              transition: 'opacity 2.5s ease-in-out',
+              zIndex: idx === bgIndex ? 1 : (idx === prevBgIndex ? 0 : -1)
+            }}
+          />
+        ))}
+
         <div className="container reveal" style={{ zIndex: 10 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '1rem', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(12px)', padding: '0.75rem 1.5rem', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.2)', marginBottom: '3rem' }}>
               <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--primary)', boxShadow: '0 0 10px var(--primary)' }}></div>
