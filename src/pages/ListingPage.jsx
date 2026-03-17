@@ -77,11 +77,11 @@ const ListingPage = () => {
   };
 
   return (
-    <div style={{ background: '#F9FAFB', minHeight: '100vh', paddingTop: 'var(--nav-height)' }}>
-      <div className="container" style={{ padding: 'clamp(2rem, 5vw, 4rem) 5% 8rem' }}>
-        <div style={{ textAlign: 'left', marginBottom: 'clamp(2rem, 4vw, 4rem)' }}>
-            <span style={{ color: '#EF4444', fontSize: '0.75rem', fontWeight: '900', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Discover Locally</span>
-            <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginTop: '0.5rem', color: '#0F172A', lineHeight: '1.1' }}>Explore <br className="mobile-only" /> Lifestyle Spots</h1>
+    <div style={{ background: '#F9FAFB', minHeight: '100vh', paddingTop: 'var(--nav-height)', overflowX: 'hidden' }}>
+      <div className="container">
+        <div style={{ paddingTop: 'clamp(2rem, 5vw, 4rem)', marginBottom: 'clamp(2rem, 4vw, 4rem)' }}>
+            <span style={{ color: '#EF4444', fontSize: '0.75rem', fontWeight: '900', letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>Discover Locally</span>
+            <h1 style={{ fontSize: 'clamp(2.25rem, 8vw, 3.5rem)', marginTop: '0.5rem', color: '#0F172A', lineHeight: '1.1', maxWidth: '800px' }}>Explore <br className="mobile-only" /> Lifestyle Spots</h1>
         </div>
 
         <div className="listing-page-layout">
@@ -106,11 +106,10 @@ const ListingPage = () => {
           </div>
           {showMobileFilters && <div className="filter-overlay" onClick={() => setShowMobileFilters(false)}></div>}
 
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
-                <div style={{ flex: '1 0 100%', marginBottom: '0.5rem' }} className="mobile-only"></div>
-                <div style={{ flex: 1 }}>
-                   <h3 style={{ fontSize: 'clamp(1.2rem, 4vw, 1.75rem)', fontWeight: '800', lineHeight: '1.2' }}>{filteredListings.length} <span style={{ color: '#64748B', fontWeight: '500' }}>Handpicked Spots Found</span></h3>
+          <div style={{ flex: 1, minWidth: 0, width: '100%' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1.5rem' }}>
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                   <h3 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.5rem)', fontWeight: '800', lineHeight: '1.3' }}>{filteredListings.length} <span style={{ color: '#64748B', fontWeight: '500' }}>Handpicked Spots Found</span></h3>
                 </div>
                 
                 {/* Active Pills */}

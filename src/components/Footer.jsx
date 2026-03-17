@@ -2,10 +2,15 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer style={{ background: '#111827', color: 'white', padding: 'clamp(4rem, 10vw, 8rem) 0 4rem' }}>
-      <div className="container" style={{ padding: '0 5%' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: 'clamp(4rem, 8vw, 6rem)' }}>
-          <div style={{ gridColumn: 'span min(1, 1)' }}>
+    <footer style={{ background: '#111827', color: 'white', padding: 'clamp(4rem, 10vw, 8rem) 0 4rem', width: '100%' }}>
+      <div className="container">
+        <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+            gap: 'clamp(2rem, 5vw, 4rem)', 
+            marginBottom: 'clamp(3rem, 8vw, 6rem)' 
+        }}>
+          <div>
             <Link to="/" style={{ textDecoration: 'none' }}>
               <h2 style={{ fontSize: 'clamp(1.5rem, 5vw, 2.25rem)', marginBottom: '1.5rem', color: 'white', fontWeight: '900', letterSpacing: '-2px' }}>
                 Fame<span style={{ color: 'var(--primary)' }}>.</span>
@@ -36,14 +41,14 @@ const Footer = () => {
             </ul>
           </div>
           
-          <div style={{ gridColumn: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+          <div>
             <h4 style={{ color: 'white', marginBottom: '1.5rem', fontSize: '1rem', fontWeight: '800', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Newsletter</h4>
             <p style={{ opacity: 0.6, fontSize: '0.9rem', marginBottom: '1.5rem', lineHeight: '1.6' }}>Stay updated with the latest trending spots.</p>
-            <div style={{ display: 'flex', gap: '0.5rem', background: 'rgba(255,255,255,0.03)', padding: '0.35rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', background: 'rgba(255,255,255,0.03)', padding: '0.35rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)', maxWidth: '400px' }}>
               <input 
                 type="email" 
                 placeholder="Email address" 
-                style={{ background: 'transparent', border: 'none', color: 'white', padding: '0.6rem 1rem', flex: 1, outline: 'none', fontSize: '0.85rem' }} 
+                style={{ background: 'transparent', border: 'none', color: 'white', padding: '0.6rem 1rem', flex: 1, outline: 'none', fontSize: '0.85rem', width: '100%' }} 
               />
               <button className="btn btn-primary" style={{ padding: '0 1.25rem', borderRadius: '8px', fontSize: '0.85rem' }}>Join</button>
             </div>

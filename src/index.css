@@ -45,19 +45,28 @@
   font-family: 'Inter', 'Noto Sans Mongolian', sans-serif;
 }
 
-body {
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+#root {
+  max-width: 100%;
   overflow-x: hidden;
 }
 
 .container {
+  width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 5%;
-  width: 100%;
+  padding: 0 max(1.5rem, 5%);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.25rem;
+  }
 }
 
 @media (max-width: 1024px) {
