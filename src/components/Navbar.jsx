@@ -68,7 +68,7 @@ const Navbar = () => {
             <a href="#trending" className="nav-link" style={{ color: isScrolled || !isHome ? 'var(--text-secondary)' : 'rgba(255,255,255,0.85)' }}>Trending</a>
             <a href="#categories" className="nav-link" style={{ color: isScrolled || !isHome ? 'var(--text-secondary)' : 'rgba(255,255,255,0.85)' }}>Explore</a>
             <button 
-              onClick={() => navigate('/marketplace')}
+              onClick={() => navigate('/listings')}
               className="nav-link" 
               style={{ color: isScrolled || !isHome ? 'var(--text-secondary)' : 'rgba(255,255,255,0.85)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
             >
@@ -143,7 +143,7 @@ const Navbar = () => {
         }}>
           <a href="#trending" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-main)', textDecoration: 'none' }}>Trending</a>
           <a href="#categories" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-main)', textDecoration: 'none' }}>Explore</a>
-          <span onClick={() => { navigate('/marketplace'); setIsMobileMenuOpen(false); }} style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-main)', cursor: 'pointer' }}>Marketplace</span>
+          <span onClick={() => { navigate('/listings'); setIsMobileMenuOpen(false); }} style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-main)', cursor: 'pointer' }}>Marketplace</span>
           <hr style={{ border: 'none', borderTop: '1px solid var(--border-light)' }} />
           {user ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
