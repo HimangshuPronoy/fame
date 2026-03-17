@@ -82,12 +82,25 @@ const Home = () => {
                 <span style={{ fontSize: '0.75rem', fontWeight: '800', letterSpacing: '0.15em', color: 'white' }}>EVERYTHING IS POSSIBLE</span>
             </div>
             
-            <h1 style={{ color: 'white', marginBottom: '1.5rem' }}>
-              Elevate Your <br/>
+            <h1 style={{ 
+              color: 'white', 
+              marginBottom: '1.5rem',
+              fontSize: 'clamp(2.8rem, 6vw, 5.5rem)',
+              maxWidth: '900px'
+            }}>
+              Elevate Your <br className="desktop-only" />
               <span style={{ fontStyle: 'italic', fontWeight: '300', opacity: 0.9 }}>Lifestyle</span> Discovery<span style={{ color: 'var(--primary)' }}>.</span>
             </h1>
             
-            <p style={{ color: 'white', fontSize: '1.1rem', maxWidth: '550px', opacity: 0.9, lineHeight: '1.8', marginBottom: '3rem' }}>
+            <p style={{ 
+              color: 'white', 
+              fontSize: 'clamp(1rem, 1.5vw, 1.25rem)', 
+              maxWidth: '650px', 
+              opacity: 0.9, 
+              lineHeight: '1.8', 
+              marginBottom: '3rem',
+              fontWeight: '500'
+            }}>
               Fame hand-verifies the world's most exclusive restaurants, secret nightspots, and elite wellness centers.
             </p>
             

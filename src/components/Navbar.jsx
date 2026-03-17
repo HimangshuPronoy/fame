@@ -50,12 +50,13 @@ const Navbar = () => {
           onClick={() => navigate('/')} 
           style={{ 
             color: isScrolled || !isHome ? '#0F172A' : (isMobileMenuOpen ? '#0F172A' : 'white'), 
-            fontSize: '1.8rem', 
+            fontSize: '2.2rem', 
             fontWeight: '900', 
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.25rem'
+            gap: '0.25rem',
+            letterSpacing: '-2px'
           }}
         >
           Fame<span style={{ color: 'var(--primary)' }}>.</span>
