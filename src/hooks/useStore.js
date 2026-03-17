@@ -36,95 +36,62 @@ export const useStore = () => {
   }, []);
 
   const fetchListings = useCallback(async () => {
-    // Use the functional form to avoid needing 'loading' as a dependency
     setLoading((currentLoading) => {
       if (currentLoading) return currentLoading;
       
-      // Perform the fetch
       (async () => {
-        // Dynamic Mock Data for Lifestyle Discovery
-        const mockLifestyleData = [
-          {
-            id: '1',
-            name: 'Iron Temple Gym',
-            category: 'Fitness',
-            description: 'Elite training facility with Olympic-grade equipment and expert coaching.',
-            location: 'Downtown District',
-            image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80',
-            price: '80',
-            rating: 4.9,
-            reviews: 128,
-            isFeatured: true
-          },
-          {
-            id: '2',
-            name: 'Sage & Salt Bistro',
-            category: 'Restaurant',
-            description: 'Artisanal seasonal flavors served in an intimate, nature-inspired setting.',
-            location: 'Harbor Square',
-            image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
-            price: '120',
-            rating: 4.8,
-            reviews: 256,
-            isFeatured: false
-          },
-          {
-            id: '3',
-            name: 'The Velvet Lounge',
-            category: 'Nightlife',
-            description: 'Exclusive cocktails and deep house rhythms in a hidden underground vault.',
-            location: 'Metro Center',
-            image: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?auto=format&fit=crop&w=800&q=80',
-            price: '150',
-            rating: 4.7,
-            reviews: 89,
-            isFeatured: true
-          },
-          {
-            id: '4',
-            name: 'Elysian Wellness Spa',
-            category: 'Wellness',
-            description: 'Holistic rejuvenation with thermal pools and therapeutic mud treatments.',
-            location: 'West Hills',
-            image: 'https://images.unsplash.com/photo-1544161515-4af6b1d462c2?auto=format&fit=crop&w=800&q=80',
-            price: '200',
-            rating: 5.0,
-            reviews: 412,
-            isFeatured: false
-          },
-          {
-            id: '5',
-            name: 'Loom & Thread Boutique',
-            category: 'Shopping',
-            description: 'Curated sustainable fashion and hand-numbered artisanal leather goods.',
-            location: 'Arts District',
-            image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80',
-            price: '45',
-            rating: 4.6,
-            reviews: 74,
-            isFeatured: false
-          },
-          {
-            id: '6',
-            name: 'Horizon Yoga Studio',
-            category: 'Fitness',
-            description: 'Panoramic views and meditative flow sessions for every skill level.',
-            location: 'Skyline Plaza',
-            image: 'https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=800&q=80',
-            price: '30',
-            rating: 4.9,
-            reviews: 156,
-            isFeatured: true
-          }
-        ];
+        try {
+          const { data, error } = await supabase
+            .from('listings')
+            .select('*')
+            .order('created_at', { ascending: false });
 
-        globalListings = mockLifestyleData;
-        setListings([...globalListings]);
-        setLoading(false);
-        notify();
+          if (error) throw error;
+
+          if (data && data.length > 0) {
+            globalListings = data;
+            setListings([...globalListings]);
+          } else {
+            // Seed mock data if DB is empty
+            const seedData = [
+              {
+                name: 'Iron Temple Gym',
+                category: 'Fitness',
+                description: 'Elite training facility with Olympic-grade equipment.',
+                location: 'Downtown District',
+                image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80',
+                price: '80',
+                rating: 4.9,
+                reviews: 128,
+                is_featured: true
+              },
+              {
+                name: 'Sage & Salt Bistro',
+                category: 'Restaurant',
+                description: 'Artisanal seasonal flavors in a nature-inspired setting.',
+                location: 'Harbor Square',
+                image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
+                price: '120',
+                rating: 4.8,
+                reviews: 256,
+                is_featured: false
+              }
+            ];
+            
+            // In a real app, we might not auto-seed, but for demonstration:
+            // await supabase.from('listings').insert(seedData);
+            globalListings = seedData;
+            setListings([...globalListings]);
+          }
+        } catch (err) {
+          console.error('Error fetching listings:', err);
+        } finally {
+          setLoading(false);
+          notify();
+        }
       })();
 
-      return true; // Set loading to true
+      return true;
     });
   }, []);
 
