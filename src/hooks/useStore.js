@@ -111,9 +111,10 @@ export const useStore = () => {
   };
 
   const addListing = async (listing) => {
+    if (!user) return;
     const { data, error } = await supabase
       .from('listings')
-      .insert([{ ...listing }])
+      .insert([{ ...listing, owner_id: user.id }])
       .select();
 
     if (!error && data) {

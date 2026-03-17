@@ -11,6 +11,7 @@ const AdminDashboard = () => {
     name: '',
     category: '',
     description: '',
+    price: '0',
     image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80'
   });
 
@@ -18,7 +19,13 @@ const AdminDashboard = () => {
     e.preventDefault();
     if (!formData.name || !formData.category) return;
     addListing(formData);
-    setFormData({ name: '', category: '', description: '', image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80' });
+    setFormData({ 
+      name: '', 
+      category: '', 
+      description: '', 
+      price: '0',
+      image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80' 
+    });
     setShowAddForm(false);
   };
 
