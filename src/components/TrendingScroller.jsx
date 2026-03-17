@@ -1,22 +1,18 @@
-import { Star, MapPin } from 'lucide-react';
+import { Star, MapPin, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useStore } from '../hooks/useStore';
 
 const TrendingScroller = () => {
   const navigate = useNavigate();
-  const spots = [
-    { name: 'Aurora Sky Bar', cat: 'Nightlife', img: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80', score: '4.9', loc: 'Downtown' },
-    { name: 'Zenith Spa', cat: 'Wellness', img: 'https://images.unsplash.com/photo-1544161515-4af6b1d462c2?auto=format&fit=crop&w=600&q=80', score: '5.0', loc: 'West End' },
-    { name: 'Terra Bistro', cat: 'Restaurant', img: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80', score: '4.8', loc: 'Harbor' },
-    { name: 'Iron Works', cat: 'Fitness', img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80', score: '4.7', loc: 'East Side' },
-    { name: 'Velvet Club', cat: 'Nightlife', img: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?auto=format&fit=crop&w=600&q=80', score: '4.9', loc: 'Metro' },
-    { name: 'Loom Studio', cat: 'Shopping', img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80', score: '4.6', loc: 'Arts Dist' },
-    { name: 'Copper & Oak', cat: 'Restaurant', img: 'https://images.unsplash.com/photo-1550966841-3ee5ad443542?auto=format&fit=crop&w=600&q=80', score: '4.9', loc: 'History Dist' },
-    { name: 'Skyline Yoga', cat: 'Fitness', img: 'https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=600&q=80', score: '4.8', loc: 'Plaza' },
-    { name: 'Artisan Bowl', cat: 'Restaurant', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80', score: '4.7', loc: 'North' },
-  ];
+  const { listings, loading } = useStore();
 
-  // Double the spots for infinite scroll effect
-  const doubleSpots = [...spots, ...spots];
+  const featuredSpots = listings.filter(l => l.is_featured);
+
+  // If no featured spots, use a subset of all listings or fallback to mock
+  const displaySpots = featuredSpots.length > 0 ? featuredSpots : listings.slice(0, 8);
+
+  // Double for infinite effect
+  const doubleSpots = [...displaySpots, ...displaySpots];
 
   return (
     <section style={{ padding: '10rem 0', background: 'white', overflow: 'hidden' }}>
@@ -38,9 +34,14 @@ const TrendingScroller = () => {
 
       <div className="trending-marquee">
         <div className="trending-marquee-content">
-          {doubleSpots.map((spot, i) => (
+          {loading ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '2rem' }}>
+              <Loader2 className="animate-spin" size={24} />
+              <span>Sycnronizing Trends...</span>
+            </div>
+          ) : doubleSpots.map((spot, i) => (
             <div 
-              key={i} 
+              key={`${spot.id || i}-${i}`} 
               onClick={() => navigate('/listings')}
               style={{ 
                 flexShrink: 0, 
@@ -55,19 +56,19 @@ const TrendingScroller = () => {
               className="trending-card"
             >
               <div style={{ overflow: 'hidden', aspectRatio: '4/5' }}>
-                <img src={spot.img} alt={spot.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s var(--ease-premium)' }} />
+                <img src={spot.image || spot.img} alt={spot.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s var(--ease-premium)' }} />
               </div>
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2.5rem', background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)', color: 'white' }}>
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2.5rem', background: 'linear-gradient(to top, rgba(0,0,0,0.95), transparent)', color: 'white' }}>
                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: '900', padding: '0.35rem 0.75rem', background: 'var(--primary)', borderRadius: '6px', textTransform: 'uppercase' }}>{spot.cat}</span>
+                    <span style={{ fontSize: '0.75rem', fontWeight: '900', padding: '0.35rem 0.75rem', background: 'var(--primary)', borderRadius: '6px', textTransform: 'uppercase' }}>{spot.category || spot.cat}</span>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.9rem', fontWeight: '800' }}>
                         <Star size={14} fill="var(--accent-gold)" color="var(--accent-gold)" />
-                        {spot.score}
+                        {spot.rating || spot.score || '5.0'}
                     </div>
                  </div>
                  <h4 style={{ fontSize: '1.6rem', fontWeight: '900', letterSpacing: '-0.5px' }}>{spot.name}</h4>
                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', opacity: 0.8, marginTop: '0.75rem', fontWeight: '600' }}>
-                    <MapPin size={14} color="var(--primary)" /> {spot.loc} District
+                    <MapPin size={14} color="var(--primary)" /> {spot.location || spot.loc}
                  </div>
               </div>
             </div>
