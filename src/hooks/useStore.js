@@ -102,33 +102,11 @@ export const useStore = () => {
     if (globalListings.length === 0) {
       fetchListings();
     }
-
-    // Auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
-        setProfile(profile);
-      } else {
-        setProfile(null);
-      }
-    });
-
-    const handleChange = () => {
-      setListings([...globalListings]);
-      setRequests([...globalRequests]);
-    };
-    listeners.push(handleChange);
-
-    return () => {
-      listeners = listeners.filter(l => l !== handleChange);
-      subscription.unsubscribe();
-    };
   }, []);
+
+  const getCategories = () => {
+    return Array.from(new Set(globalListings.map(l => l.category)));
+  };
 
   const addListing = async (listing) => {
     const { data, error } = await supabase
